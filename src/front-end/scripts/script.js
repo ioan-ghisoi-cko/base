@@ -62,7 +62,6 @@ const payWithToken = (token) => {
     },
     (data) => {
       console.log("The API RESPONSE: ", data);
-      alert("Check the console for the response.");
     }
   );
 };
