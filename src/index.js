@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
+const socket = require("socket.io");
 
 const apiRoutes = require("./back-end/api");
 
@@ -11,13 +12,13 @@ app.use(express.static(path.join(__dirname, "../front-end")));
 app.use(express.static(path.join(__dirname, "../back-end")));
 app.use(
   cors({
-    origin: "*"
+    origin: "*",
   })
 );
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
-    extended: true
+    extended: true,
   })
 );
 app.use(apiRoutes);
@@ -28,10 +29,26 @@ app.get("/", (req, res) => {
 
 const port = process.env.PORT || 8080;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(
     "\x1b[36m%s\x1b[34m%s\x1b[0m",
     "💪 Server running on ➡️ ",
     `http://localhost:${port}`
   );
+});
+
+// Socket
+var io = socket(server);
+
+io.on("connection", (socket) => {
+  console.log("SCOKET", socket.id);
+
+  socket.on("pula", (data) => {
+    console.log(data);
+  });
+});
+
+app.post("/webhook", (req, res) => {
+  io.emit("webhook", req.body);
+  res.send(200);
 });
