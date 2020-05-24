@@ -8,8 +8,7 @@ const apiRoutes = require("./back-end/api");
 
 // Configure express to use body parser and cors, and add our API endpoints
 const app = express();
-app.use(express.static(path.join(__dirname, "../front-end")));
-app.use(express.static(path.join(__dirname, "../back-end")));
+app.use(express.static(path.join(__dirname, "./front-end")));
 app.use(
   cors({
     origin: "*",
