@@ -30,7 +30,6 @@ function getErrorMessage(event) {
   if (event.isValid || event.isEmpty) {
     return "";
   }
-
   return errors[event.element];
 }
 
@@ -63,10 +62,12 @@ const payWithToken = (token) => {
     },
     (data) => {
       console.log("The API RESPONSE: ", data);
+      alert("Check the console for the response.");
     }
   );
 };
 
+// utility function to send HTTP calls to our back end API
 const http = ({ method, route, body }, callback) => {
   let requestData = {
     method,
@@ -87,7 +88,7 @@ const http = ({ method, route, body }, callback) => {
     .catch((er) => console.log(er));
 };
 
-// Socket part:
+// Socket part so we can handle webhooks:
 var socket = io(window.location.protocol + "//" + window.location.hostname);
 socket.on("connect", function () {
   console.log("socket connected");
