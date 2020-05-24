@@ -9,12 +9,23 @@
 </head>
 
 <body>
-  <h2>Hello cko world!</h2>
+  <div id="payment-form">
+    <div class="one-liner">
+      <div class="card-frame"></div>
+      <button id="pay-button" disabled>
+        PAY GBP 24.99
+      </button>
+    </div>
+    <p class="error-message"></p>
+  </div>
+
+  <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
     integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo="
     crossorigin="anonymous"></script>
 
+  <!-- Your script -->
   <script src="./scripts/script.js"></script>
 
 </body>
