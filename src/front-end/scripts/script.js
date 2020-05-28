@@ -60,7 +60,7 @@ Frames.init({
       },
       focus: {
         fontSize: "14px",
-        fontWeight: "300"
+        fontWeight: "300",
       },
     },
   },
@@ -228,8 +228,8 @@ Frames.addEventHandler(
 payButton.addEventListener("click", function (event) {
   event.preventDefault();
 
-  document.getElementById('pay-message').style.display = 'none';
-  document.getElementById('loading-dots').style.display = 'flex';
+  document.getElementById("pay-message").style.display = "none";
+  document.getElementById("loading-dots").style.display = "flex";
 
   Frames.submitCard()
     .then(function (val) {
@@ -269,19 +269,18 @@ const payWithToken = (token) => {
       console.log("API RESPONSE: ", data);
 
       if (data.approved) {
-        console.log('Approved');
-        document.getElementById('loading-dots').style.display = 'none';
+        console.log("Approved");
+        document.getElementById("loading-dots").style.display = "none";
 
         // TODO: Approved animation + "New Payment"
-        document.getElementById('pay-message').innerHTML = 'Approved!';
-        document.getElementById('pay-message').style.display = 'block';
-
+        document.getElementById("pay-message").innerHTML = "Approved!";
+        document.getElementById("pay-message").style.display = "block";
+      } else {
+        document.getElementById("loading-dots").style.display = "none";
+        // TODO: Declined animation + "Retry"
+        document.getElementById("pay-message").innerHTML = "Declined";
+        document.getElementById("pay-message").style.display = "block";
       }
-      document.getElementById('loading-dots').style.display = 'none';
-      // TODO: Declined animation + "Retry"
-      document.getElementById('pay-message').innerHTML = 'Declined';
-      document.getElementById('pay-message').style.display = 'block';
-
     }
   );
 };
