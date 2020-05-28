@@ -42,12 +42,8 @@ Frames.init({
       borderRadius: "5px",
       border: "1px solid rgba(0, 0, 0, 0.1)",
       borderRadius: "5px",
-      fontSize: "18px",
-      //   fontFamily: "'Open Sans'",
-      color: "#263238",
-      fontSize: "12px",
-      fontStyle: "normal",
-      fontFamily: "'Open Sans', Open Sans, Helvetica, Arial, sans-serif",
+      fontSize: "14px",
+      fontFamily: "Arial, Helvetica, sans-serif",
       fontWeight: "normal",
       lineHeight: "16px",
       letterSpacing: "0.22px",
@@ -60,10 +56,11 @@ Frames.init({
     },
     placeholder: {
       base: {
-        fontSize: "12px",
+        fontSize: "12px", // Hide placeholder behind label when not floating
       },
       focus: {
         fontSize: "14px",
+        fontWeight: "300"
       },
     },
   },
@@ -231,6 +228,9 @@ Frames.addEventHandler(
 payButton.addEventListener("click", function (event) {
   event.preventDefault();
 
+  document.getElementById('pay-message').style.display = 'none';
+  document.getElementById('loading-dots').style.display = 'flex';
+
   Frames.submitCard()
     .then(function (val) {
       console.log("TOKENIZATION: ", val);
@@ -266,7 +266,22 @@ const payWithToken = (token) => {
       body: { token: token },
     },
     (data) => {
-      console.log("The API RESPONSE: ", data);
+      console.log("API RESPONSE: ", data);
+
+      if (data.approved) {
+        console.log('Approved');
+        document.getElementById('loading-dots').style.display = 'none';
+
+        // TODO: Approved animation + "New Payment"
+        document.getElementById('pay-message').innerHTML = 'Approved!';
+        document.getElementById('pay-message').style.display = 'block';
+
+      }
+      document.getElementById('loading-dots').style.display = 'none';
+      // TODO: Declined animation + "Retry"
+      document.getElementById('pay-message').innerHTML = 'Declined';
+      document.getElementById('pay-message').style.display = 'block';
+
     }
   );
 };

@@ -7,9 +7,9 @@ route.post("/payWithToken", async (req, res) => {
     source: {
       token: req.body.token,
     },
-    currency: "EUR",
-    amount: 1000, // cents
-    reference: "ORDER123",
+    currency: "GBP",
+    amount: 2499, // cents
+    reference: "TEST-ORDER",
   });
   res.send(payment);
 });

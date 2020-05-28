@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Environment</title>
+  <title>Payment Demo</title>
   <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="./style/style.css" />
 </head>
@@ -50,8 +50,16 @@
   </div>
 
   <button id="pay-button" disabled="">
-    PAY £25
+    <div id="pay-message">PAY £25</div>
+
+      <div id="loading-dots"class="animation-wrapper">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
   </button>
+
 
   <div>
     <span class="error-message error-message__name"></span>
@@ -59,6 +67,7 @@
     <span class="error-message error-message__expiry-date"></span>
     <span class="error-message error-message__cvv"></span>
   </div>
+
 
 
 </form>
