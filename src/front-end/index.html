@@ -8,7 +8,15 @@
   <link rel="stylesheet" href="./style/style.css" />
 </head>
 
-<form id="payment-form">
+
+<div id="initial-loading-dots" class="animation-wrapper gray">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<form id="payment-form" style="display: none;">
+
   <div class="float-label-wrapper">
     <input type="text" name="name-input" id="name-input" placeholder="John Smith">
     <label id="name-label" for="name-input">Cardholder Name</label>
@@ -52,11 +60,11 @@
   <button id="pay-button" disabled="">
     <div id="pay-message">PAY £25</div>
 
-      <div id="loading-dots"class="animation-wrapper">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+    <div id="loading-dots" class="animation-wrapper">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
 
   </button>
 
@@ -75,7 +83,8 @@
 <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
-  integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
+  integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo="
+  crossorigin="anonymous"></script>
 
 <!-- Your script -->
 <script src="./scripts/script.js"></script>

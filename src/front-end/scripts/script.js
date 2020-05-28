@@ -6,6 +6,9 @@ var cvvLabel = document.getElementById("cvv-label");
 var nameInput = document.getElementById("name-input");
 var nameLabel = document.getElementById("name-label");
 
+// show the loader until Frames is ready
+document.getElementById("initial-loading-dots").style.display = "flex";
+
 var state = {
   "card-number": {
     isValid: false,
@@ -109,6 +112,11 @@ Frames.addEventHandler(
     payButton.disabled = !Frames.isCardValid();
   }
 );
+
+Frames.addEventHandler(Frames.Events.READY, () => {
+  document.getElementById("initial-loading-dots").style.display = "none";
+  form.style.display = "block";
+});
 
 Frames.addEventHandler(
   Frames.Events.PAYMENT_METHOD_CHANGED,

@@ -11,13 +11,13 @@ const app = express();
 app.use(express.static(path.join(__dirname, "./front-end")));
 app.use(
   cors({
-    origin: "*"
+    origin: "*",
   })
 );
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
-    extended: true
+    extended: true,
   })
 );
 app.use(apiRoutes);
@@ -39,10 +39,10 @@ const server = app.listen(port, () => {
 // Socket
 var io = socket(server);
 
-io.on("connection", socket => {
+io.on("connection", (socket) => {
   console.log("SCOKET", socket.id);
 
-  socket.on("pula", data => {
+  socket.on("pula", (data) => {
     console.log(data);
   });
 });

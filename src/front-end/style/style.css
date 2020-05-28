@@ -1,8 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
-
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
@@ -46,11 +43,11 @@ iframe {
   margin-bottom: 8px;
 }
 
-.date-and-code > div:nth-child(1) {
+.date-and-code>div:nth-child(1) {
   margin-right: 5px;
 }
 
-.date-and-code > div:nth-child(2) {
+.date-and-code>div:nth-child(2) {
   margin-left: 5px;
 }
 
@@ -208,7 +205,7 @@ iframe {
   padding-top: 10px;
 }
 
-.animation-wrapper > span {
+.animation-wrapper>span {
   background: #fff;
   height: 12px;
   width: 12px;
@@ -218,13 +215,36 @@ iframe {
   animation: bounce 450ms infinite alternate;
 }
 
-.animation-wrapper > span:nth-of-type(2) {
+.animation-wrapper>span:nth-of-type(2) {
   background: #fff;
   animation-delay: 100ms;
 }
 
-.animation-wrapper > span:nth-of-type(3) {
-  animation-delay: 200ms;;
+.animation-wrapper>span:nth-of-type(3) {
+  animation-delay: 200ms;
+  ;
+}
+
+.gray {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.gray>span {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.gray>span:nth-of-type(2) {
+  background: rgba(0, 0, 0, 0.2);
+  animation-delay: 100ms;
+}
+
+.gray>span:nth-of-type(3) {
+  animation-delay: 200ms;
 }
 
 @keyframes bounce {
