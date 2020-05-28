@@ -3,30 +3,82 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Environment</title>
+  <title>Payment Demo</title>
   <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="./style/style.css" />
 </head>
 
-<body>
-  <div id="payment-form">
-    <div class="one-liner">
-      <div class="card-frame"></div>
-      <button id="pay-button" disabled>
-        PAY GBP 24.99
-      </button>
-    </div>
-    <p class="error-message"></p>
+<form id="payment-form">
+  <div class="float-label-wrapper">
+    <input type="text" name="name-input" id="name-input" placeholder="John Smith">
+    <label id="name-label" for="name-input">Cardholder Name</label>
   </div>
 
-  <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
+  <div class="float-label-wrapper">
+    <div class="input-container card-number">
+      <div class="card-number-frame"></div>
+      <div class="icon-container payment-method">
+        <img id="logo-payment-method" />
+        <img id="icon-card-number-error" />
+      </div>
+    </div>
+    <label id="card-label" for="name">Card Number</label>
+  </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
-    integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo="
-    crossorigin="anonymous"></script>
+  <div class="date-and-code">
 
-  <!-- Your script -->
-  <script src="./scripts/script.js"></script>
+    <div class="float-label-wrapper">
+      <div class="input-container expiry-date">
+        <div class="expiry-date-frame"></div>
+        <div class="icon-container">
+          <img id="icon-expiry-date-error" />
+        </div>
+      </div>
+      <label id="date-label" for="name">Expiry Date</label>
+    </div>
+
+    <div class="float-label-wrapper">
+      <div class="input-container cvv">
+        <div class="cvv-frame"></div>
+        <div class="icon-container">
+          <img id="icon-cvv-error" />
+        </div>
+      </div>
+      <label id="cvv-label" for="name">CVV</label>
+    </div>
+
+  </div>
+
+  <button id="pay-button" disabled="">
+    <div id="pay-message">PAY £25</div>
+
+      <div id="loading-dots"class="animation-wrapper">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+  </button>
+
+
+  <div>
+    <span class="error-message error-message__name"></span>
+    <span class="error-message error-message__card-number"></span>
+    <span class="error-message error-message__expiry-date"></span>
+    <span class="error-message error-message__cvv"></span>
+  </div>
+
+
+
+</form>
+
+<script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
+  integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
+
+<!-- Your script -->
+<script src="./scripts/script.js"></script>
 
 </body>
 
