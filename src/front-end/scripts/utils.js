@@ -32,7 +32,6 @@ nameInput.addEventListener("blur", function (event) {
 });
 
 nameInput.addEventListener("input", (e) => {
-  console.log(e.target.value.length > 2);
   if (Frames.isCardValid() && e.target.value.length > 2) {
     payButton.disabled = false;
   } else {
