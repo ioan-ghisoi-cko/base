@@ -62,7 +62,7 @@ const http = ({ method, route, body }, callback) => {
 };
 
 // Socket part so we can handle webhooks:
-// var socket = io();
-// socket.on("webhook", (webhookBody) => {
-//   console.log("WEBHOOK: ", webhookBody);
-// });
+var socket = io();
+socket.on("webhook", (webhookBody) => {
+  console.log("WEBHOOK: ", webhookBody);
+});
