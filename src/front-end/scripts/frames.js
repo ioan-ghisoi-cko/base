@@ -178,6 +178,8 @@ const payWithToken = (token) => {
       payButtonLoader.style.display = "none";
       payButtonText.innerHTML = data.approved ? "Approved!" : "Declined";
       payButtonText.style.display = "block";
+
+      // TODO: Handle timeout error
     }
   );
 };

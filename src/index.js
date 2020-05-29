@@ -40,7 +40,7 @@ const server = app.listen(port, () => {
 var io = socket(server);
 
 io.on("connection", (socket) => {
-  console.log("SCOKET", socket.id);
+  console.log("SOCKET", socket.id);
 
   socket.on("pula", (data) => {
     console.log(data);
