@@ -10,6 +10,9 @@ const payButton = document.getElementById("pay-button");
 const payButtonText = document.getElementById("button-message");
 const payButtonLoader = document.getElementById("button-dots");
 
+// Show the loading animation until Frames is ready
+framesLoader.style.display = "flex";
+
 // When the name input is focused
 nameInput.addEventListener("focus", function () {
   nameLabel.classList.add("float-up");
@@ -59,7 +62,7 @@ const http = ({ method, route, body }, callback) => {
 };
 
 // Socket part so we can handle webhooks:
-var socket = io();
-socket.on("webhook", (webhookBody) => {
-  console.log("WEBHOOK: ", webhookBody);
-});
+// var socket = io();
+// socket.on("webhook", (webhookBody) => {
+//   console.log("WEBHOOK: ", webhookBody);
+// });

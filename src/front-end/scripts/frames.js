@@ -53,6 +53,12 @@ Frames.init({
   },
 });
 
+// When Frames is ready
+Frames.addEventHandler(Frames.Events.READY, (event) => {
+  framesLoader.style.display = "none";
+  form.style.display = "block";
+});
+
 // When a Frames input is focused
 Frames.addEventHandler(Frames.Events.FRAME_FOCUS, (event) => {
   // Float the label up when the field is focused
