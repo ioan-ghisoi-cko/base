@@ -54,11 +54,22 @@ const http = ({ method, route, body }, callback) => {
     delete requestData.body;
   }
 
-  fetch(`${window.location.origin}${route}`, requestData)
+  // Timeout after 10 seconds
+  timeout(10000, fetch(`${window.location.origin}${route}`, requestData))
     .then((res) => res.json())
     .then((data) => callback(data))
     .catch((er) => console.log(er));
 };
+
+// For connection timeout error handling
+const timeout = (ms, promise) => {
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      reject(new Error("Connection timeout"))
+    }, ms)
+    promise.then(resolve, reject)
+  })
+}
 
 // Socket part so we can handle webhooks:
 var socket = io();
