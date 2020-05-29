@@ -19,6 +19,12 @@ body {
     padding: 0;
 }
 
+/* Remove autofill color */
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
 iframe {
     /* This fixes a mobile Safari bug, without it the input will be 15px tall */
     height: var(--input-height) !important;
