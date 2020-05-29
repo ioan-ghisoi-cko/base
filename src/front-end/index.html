@@ -5,89 +5,65 @@
   <meta charset="UTF-8" />
   <title>Payment Demo</title>
   <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="./style/style.css" />
+  <link rel="stylesheet" href="./style/general.style.css" />
+  <link rel="stylesheet" href="./style/loader.style.css" />
 </head>
 
-
-<div id="initial-loading-dots" class="animation-wrapper gray">
+<!-- Will display until Frames loads -->
+<div id="page-loader" class="dots gray-dots">
   <span></span>
   <span></span>
   <span></span>
 </div>
 
-<form id="payment-form" style="display: none;">
-
-  <div class="float-label-wrapper">
-    <input type="text" name="name-input" id="name-input" placeholder="John Smith">
+<div id="payment-form">
+  <!-- Cardholder Name -->
+  <div class="input-wrapper name">
     <label id="name-label" for="name-input">Cardholder Name</label>
+    <input type="text" name="name-input" id="name-input" placeholder="John Smith">
   </div>
 
-  <div class="float-label-wrapper">
-    <div class="input-container card-number">
+  <!-- Card Number -->
+  <div class="input-wrapper card-number">
+    <label id="card-label">Card Number</label>
+    <div class="card-number">
       <div class="card-number-frame"></div>
-      <div class="icon-container payment-method">
-        <img id="logo-payment-method" />
-        <img id="icon-card-number-error" />
-      </div>
+      <img id="payment-method" />
     </div>
-    <label id="card-label" for="name">Card Number</label>
   </div>
 
   <div class="date-and-code">
-
-    <div class="float-label-wrapper">
-      <div class="input-container expiry-date">
-        <div class="expiry-date-frame"></div>
-        <div class="icon-container">
-          <img id="icon-expiry-date-error" />
-        </div>
-      </div>
-      <label id="date-label" for="name">Expiry Date</label>
+    <!-- Expiry Date -->
+    <div class="input-wrapper expiry-date">
+      <label id="date-label">Expiry Date</label>
+      <div class="expiry-date-frame"></div>
     </div>
 
-    <div class="float-label-wrapper">
-      <div class="input-container cvv">
-        <div class="cvv-frame"></div>
-        <div class="icon-container">
-          <img id="icon-cvv-error" />
-        </div>
-      </div>
-      <label id="cvv-label" for="name">CVV</label>
+    <!-- Cvv -->
+    <div class="input-wrapper cvv">
+      <label id="cvv-label">Cvv</label>
+      <div class="cvv-frame"></div>
     </div>
-
   </div>
 
   <button id="pay-button" disabled="">
-    <div id="pay-message">PAY £25</div>
-
-    <div id="loading-dots" class="animation-wrapper">
+    <div id="button-message">Pay Now</div>
+    <div id="button-dots" class="dots white-dots">
       <span></span>
       <span></span>
       <span></span>
     </div>
-
   </button>
-
-
-  <div>
-    <span class="error-message error-message__name"></span>
-    <span class="error-message error-message__card-number"></span>
-    <span class="error-message error-message__expiry-date"></span>
-    <span class="error-message error-message__cvv"></span>
-  </div>
-
-
-
-</form>
-
+</div>
 <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
-  integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo="
-  crossorigin="anonymous"></script>
+<!-- Socket IO -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 
 <!-- Your script -->
-<script src="./scripts/script.js"></script>
+<script src="./scripts/utils.js"></script>
+<script src="./scripts/frames.js"></script>
 
 </body>
 
