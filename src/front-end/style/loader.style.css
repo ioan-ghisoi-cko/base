@@ -1,0 +1,46 @@
+#page-loader {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.dots {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.dots>span {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    margin-left: 0.5em;
+    transform: translateY(0);
+    animation: bounce 450ms infinite alternate;
+}
+
+.dots>span:nth-of-type(2) {
+    animation-delay: 100ms;
+}
+
+.dots>span:nth-of-type(3) {
+    animation-delay: 200ms;
+}
+
+.gray-dots span {
+    background: var(--frames-loader-colour);
+}
+
+.white-dots span {
+    background: var(--button-loader-colour);
+}
+
+@keyframes bounce {
+    to {
+        transform: translateY(-1em);
+    }
+}
