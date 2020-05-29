@@ -14,19 +14,17 @@ const hintCardNumber = document.getElementById("hint_number");
 const hintDate = document.getElementById("hint_date");
 const hintCvv = document.getElementById("hint_cvv");
 
-
-
 // Show the loading animation until Frames is ready
 framesLoader.style.display = "flex";
 
 // When the name input is focused
-nameInput.addEventListener("focus", function () {
+nameInput.addEventListener("focus", () => {
   nameLabel.classList.add("float-up");
   nameInput.classList.remove("invalid-input");
 });
 
 // When the name input is blurred
-nameInput.addEventListener("blur", function (event) {
+nameInput.addEventListener("blur", (event) => {
   if (nameInput.value === "") {
     nameLabel.classList.remove("float-up");
   } else if (nameInput.value.length < 2) {
@@ -71,11 +69,11 @@ const http = ({ method, route, body }, callback) => {
 const timeout = (ms, promise) => {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
-      reject(new Error("Connection timeout"))
-    }, ms)
-    promise.then(resolve, reject)
-  })
-}
+      reject(new Error("Connection timeout"));
+    }, ms);
+    promise.then(resolve, reject);
+  });
+};
 
 // Socket part so we can handle webhooks:
 var socket = io();
