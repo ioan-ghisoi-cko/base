@@ -30,18 +30,22 @@
       <div class="card-number-frame"></div>
       <img id="payment-method" />
     </div>
-    <dib id="hint_number" class="card-hint hide">
-      <svg width="30" height="25"><line x1="0" y1="20" x2="30" y2="20" stroke="rgba(0, 0, 0, 0.3)"></line></svg>
-        <span>4242 4242 4242 4242</span>
-      </dib>
+    <dib id="hint_number" class="hint card-hint hide">
+      <svg width="15" height="25">
+        <line x1="0" y1="20" x2="30" y2="20" stroke="rgba(0, 0, 0, 0.3)"></line>
+      </svg>
+      <span>4242 4242 4242 4242</span>
+    </dib>
   </div>
 
   <div class="date-and-code">
     <!-- Expiry Date -->
     <div class="input-wrapper expiry-date">
-      <dib id="hint_date" class="date-hint hide">
+      <dib id="hint_date" class="hint date-hint hide">
         <span>Future Date</span>
-      <svg width="30" height="25"><line x1="0" y1="20" x2="30" y2="20" stroke="rgba(0, 0, 0, 0.3)"></line></svg>
+        <svg width="15" height="25">
+          <line x1="0" y1="20" x2="30" y2="20" stroke="rgba(0, 0, 0, 0.3)"></line>
+        </svg>
       </dib>
       <label id="date-label">Expiry Date</label>
       <div class="expiry-date-frame"></div>
@@ -51,8 +55,10 @@
     <div class="input-wrapper cvv">
       <label id="cvv-label">CVV</label>
       <div class="cvv-frame"></div>
-      <dib id="hint_cvv" class="cvv-hint hide">
-      <svg width="30" height="25"><line x1="0" y1="20" x2="30" y2="20" stroke="rgba(0, 0, 0, 0.3)"></line></svg>
+      <dib id="hint_cvv" class="hint cvv-hint hide">
+        <svg width="15" height="25">
+          <line x1="0" y1="20" x2="30" y2="20" stroke="rgba(0, 0, 0, 0.3)"></line>
+        </svg>
         <span>100</span>
       </dib>
     </div>
