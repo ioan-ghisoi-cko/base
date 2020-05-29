@@ -65,12 +65,15 @@ Frames.addEventHandler(Frames.Events.FRAME_FOCUS, (event) => {
   switch (event.element) {
     case "card-number":
       cardLabel.classList.add("float-up");
+      hintCardNumber.classList.remove("hide");
       break;
     case "expiry-date":
       dateLabel.classList.add("float-up");
+      hintDate.classList.remove("hide");
       break;
     case "cvv":
       cvvLabel.classList.add("float-up");
+      hintCvv.classList.remove("hide");
       break;
   }
 
@@ -84,16 +87,25 @@ Frames.addEventHandler(Frames.Events.FRAME_BLUR, (event) => {
     case "card-number":
       if (state["card-number"].isEmpty) {
         cardLabel.classList.remove("float-up");
+        hintCardNumber.classList.add("hide");
+      } else if (state["card-number"].isValid) {
+        hintCardNumber.classList.add("hide");
       }
       break;
     case "expiry-date":
       if (state["expiry-date"].isEmpty) {
         dateLabel.classList.remove("float-up");
+        hintDate.classList.add("hide");
+      } else if (state["expiry-date"].isValid) {
+        hintDate.classList.add("hide");
       }
       break;
     case "cvv":
       if (state["card-number"].isEmpty) {
         cvvLabel.classList.remove("float-up");
+        hintCvv.classList.add("hide");
+      } else if (state["card-number"].isValid) {
+        hintCvv.classList.add("hide");
       }
       break;
   }

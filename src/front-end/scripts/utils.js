@@ -10,6 +10,12 @@ const payButton = document.getElementById("pay-button");
 const payButtonText = document.getElementById("button-message");
 const payButtonLoader = document.getElementById("button-dots");
 
+const hintCardNumber = document.getElementById("hint_number");
+const hintDate = document.getElementById("hint_date");
+const hintCvv = document.getElementById("hint_cvv");
+
+
+
 // Show the loading animation until Frames is ready
 framesLoader.style.display = "flex";
 
@@ -63,8 +69,8 @@ const http = ({ method, route, body }, callback) => {
 
 // For connection timeout error handling
 const timeout = (ms, promise) => {
-  return new Promise(function(resolve, reject) {
-    setTimeout(function() {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
       reject(new Error("Connection timeout"))
     }, ms)
     promise.then(resolve, reject)
