@@ -5,6 +5,8 @@ var dateLabel = document.getElementById("date-label");
 var cvvLabel = document.getElementById("cvv-label");
 var nameInput = document.getElementById("name-input");
 var nameLabel = document.getElementById("name-label");
+var loadingDots = document.getElementById("loading-dots");
+var payMessage = document.getElementById("pay-message");
 
 var state = {
   "card-number": {
@@ -94,12 +96,12 @@ Frames.addEventHandler(
     }
     setState(event);
 
-    var e = event.element;
-    if (event.isValid || event.isEmpty) {
-      clearErrorMessage(e);
-    } else {
-      setErrorMessage(e);
-    }
+    // var e = event.element;
+    // if (event.isValid || event.isEmpty) {
+    //   clearErrorMessage(e);
+    // } else {
+    //   setErrorMessage(e);
+    // }
   }
 );
 
@@ -202,21 +204,21 @@ function floatLabelCenter(el) {
   message.textContent = "";
 }
 
-function clearErrorMessage(el) {
-  var selector = ".error-message__" + el;
-  var message = document.querySelector(selector);
-  message.textContent = "";
-}
+// function clearErrorMessage(el) {
+//   var selector = ".error-message__" + el;
+//   var message = document.querySelector(selector);
+//   message.textContent = "";
+// }
 
 function hasErrorIcon(img) {
   return img.hasAttribute("src") && img.src.indexOf("error") !== -1;
 }
 
-function setErrorMessage(el) {
-  var selector = ".error-message__" + el;
-  var message = document.querySelector(selector);
-  message.textContent = errors[el];
-}
+// function setErrorMessage(el) {
+//   var selector = ".error-message__" + el;
+//   var message = document.querySelector(selector);
+//   message.textContent = errors[el];
+// }
 
 Frames.addEventHandler(
   Frames.Events.CARD_TOKENIZATION_FAILED,
@@ -228,8 +230,8 @@ Frames.addEventHandler(
 payButton.addEventListener("click", function (event) {
   event.preventDefault();
 
-  document.getElementById("pay-message").style.display = "none";
-  document.getElementById("loading-dots").style.display = "flex";
+  payMessage.style.display = "none";
+  loadingDots.style.display = "flex";
 
   Frames.submitCard()
     .then(function (val) {
@@ -243,7 +245,7 @@ payButton.addEventListener("click", function (event) {
 });
 
 nameInput.addEventListener("focus", function () {
-  clearErrorMessage("name");
+  // clearErrorMessage("name");
   nameLabel.classList.add("float-up");
   nameInput.classList.remove("invalid-input");
 });
@@ -252,7 +254,7 @@ nameInput.addEventListener("blur", function (event) {
   if (nameInput.value === "") {
     nameLabel.classList.remove("float-up");
     nameInput.classList.add("invalid-input");
-    setErrorMessage("name");
+    // setErrorMessage("name");
   } else {
     Frames.cardholder.name = nameInput.value;
   }
@@ -270,16 +272,19 @@ const payWithToken = (token) => {
 
       if (data.approved) {
         console.log("Approved");
-        document.getElementById("loading-dots").style.display = "none";
-
+        loadingDots.style.display = "none";
         // TODO: Approved animation + "New Payment"
-        document.getElementById("pay-message").innerHTML = "Approved!";
-        document.getElementById("pay-message").style.display = "block";
-      } else {
-        document.getElementById("loading-dots").style.display = "none";
+        payMessage.innerHTML = "Approved!";
+        payMessage.style.display = "block";
+      } else if (!data.approved) {
+        loadingDots.style.display = "none";
         // TODO: Declined animation + "Retry"
-        document.getElementById("pay-message").innerHTML = "Declined";
-        document.getElementById("pay-message").style.display = "block";
+        payMessage.innerHTML = "Declined";
+        payMessage.style.display = "block";
+      }
+      // Timeout/connection error
+      else {
+        // Handle timeout error
       }
     }
   );
@@ -300,11 +305,21 @@ const http = ({ method, route, body }, callback) => {
     delete requestData.body;
   }
 
-  fetch(`${window.location.origin}${route}`, requestData)
+  timeout(10000, fetch(`${window.location.origin}${route}`, requestData))
     .then((res) => res.json())
     .then((data) => callback(data))
     .catch((er) => console.log(er));
 };
+
+// For connection timeout error handling
+function timeout(ms, promise) {
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      reject(new Error("Connection timeout"))
+    }, ms)
+    promise.then(resolve, reject)
+  })
+}
 
 // Socket part so we can handle webhooks:
 var socket = io();
