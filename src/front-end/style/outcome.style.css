@@ -4,7 +4,7 @@
   display: none;
   position: absolute;
   bottom: 2.3em;
-  left: 9em;
+  left: 8em;
   height: 2.5em;
   width: 0.75em;
 }
@@ -62,7 +62,7 @@
   height: 50px;
   position: absolute;
   bottom: 0px;
-  left: 150px;
+  left: 135px;
 }
 .container--fail .container__path {
   stroke: #ffffff;
@@ -73,7 +73,7 @@
   transform-origin: 50% 50%;
   stroke-dasharray: 29;
   stroke-dashoffset: 29;
-  animation: stroke 0.8s cubic-bezier(0.65, 0, 0.45, 1) 0s forwards;
+  animation: stroke 0.75s cubic-bezier(0.65, 0, 0.45, 1) 0s forwards;
 }
 
 @keyframes stroke {
@@ -82,9 +82,9 @@
     height: 50px;
     opacity: 1;
   }
-  60% {
-    width: 50px;
-    height: 50px;
+  70% {
+    width: 25px;
+    height: 25px;
     opacity: 1;
   }
   100% {

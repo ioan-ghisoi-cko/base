@@ -197,7 +197,9 @@ const payWithToken = (token) => {
         window.setTimeout(() => {
           $(".checkmark").toggle();
           // TODO: Transition in "New Payment" with retry icon
-          payButtonText.innerHTML = "New Payment";
+          // refreshIcon.style.display = "inline-block"
+          payButtonText.innerHTML =
+            '<img id="refresh-icon" src="./images/refresh_white.png" alt="refresh" /> New Payment';
           payButtonText.style.display = "block";
         }, 750);
       }
@@ -209,7 +211,9 @@ const payWithToken = (token) => {
         window.setTimeout(() => {
           $(".container").toggle();
           // TODO: Transition in "Retry" with retry icon
-          payButtonText.innerHTML = "Retry";
+          // refreshIcon.style.display = "inline-block"
+          payButtonText.innerHTML =
+            '<img id="refresh-icon" src="./images/refresh_white.png" alt="refresh" /> Retry';
           payButtonText.style.display = "block";
         }, 750);
       }
