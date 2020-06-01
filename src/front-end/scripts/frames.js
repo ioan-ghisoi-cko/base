@@ -1,3 +1,6 @@
+document.querySelector('.checkmark').classList.add('hide');
+document.querySelector('.cross').classList.add('hide');
+
 var state = {
   "card-number": {
     isValid: false,
@@ -188,10 +191,31 @@ const payWithToken = (token) => {
     (data) => {
       console.log("API RESPONSE: ", data);
       payButtonLoader.style.display = "none";
-      payButtonText.innerHTML = data.approved ? "Approved!" : "Declined";
-      payButtonText.style.display = "block";
 
-      // TODO: Handle timeout error
+      // Payment approved
+      if (data.approved) {
+        payButton.style.backgroundColor = "rgba(108, 195, 180, 1)";
+        document.querySelector('.checkmark').classList.remove('hide')
+
+        window.setTimeout(() => {
+          document.querySelector('.checkmark').classList.add('hide')
+          payButtonText.innerHTML =
+            '<img id="refresh-icon" src="./images/refresh_white.png" alt="refresh" /> New Payment';
+          payButtonText.style.display = "block";
+        }, 750);
+      }
+      // Payment declined/timeout error
+      else {
+        payButton.style.backgroundColor = "#ED6077";
+        document.querySelector('.cross').classList.remove('hide')
+
+        window.setTimeout(() => {
+          document.querySelector('.cross').classList.add('hide')
+          payButtonText.innerHTML =
+            '<img id="refresh-icon" src="./images/refresh_white.png" alt="refresh" /> Retry';
+          payButtonText.style.display = "block";
+        }, 750);
+      }
     }
   );
 };
