@@ -7,6 +7,8 @@
   <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="./style/general.style.css" />
   <link rel="stylesheet" href="./style/loader.style.css" />
+  <link rel="stylesheet" href="./style/outcome.style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <!-- Will display until Frames loads -->
@@ -31,9 +33,11 @@
       <img id="payment-method" />
     </div>
     <dib id="hint_number" class="card-hint hide">
-      <svg width="30" height="25"><line x1="0" y1="20" x2="30" y2="20" stroke="rgba(0, 0, 0, 0.3)"></line></svg>
-        <span>4242 4242 4242 4242</span>
-      </dib>
+      <svg width="30" height="25">
+        <line x1="0" y1="20" x2="30" y2="20" stroke="rgba(0, 0, 0, 0.3)"></line>
+      </svg>
+      <span>4242 4242 4242 4242</span>
+    </dib>
   </div>
 
   <div class="date-and-code">
@@ -41,7 +45,9 @@
     <div class="input-wrapper expiry-date">
       <dib id="hint_date" class="date-hint hide">
         <span>Future Date</span>
-      <svg width="30" height="25"><line x1="0" y1="20" x2="30" y2="20" stroke="rgba(0, 0, 0, 0.3)"></line></svg>
+        <svg width="30" height="25">
+          <line x1="0" y1="20" x2="30" y2="20" stroke="rgba(0, 0, 0, 0.3)"></line>
+        </svg>
       </dib>
       <label id="date-label">Expiry Date</label>
       <div class="expiry-date-frame"></div>
@@ -52,7 +58,9 @@
       <label id="cvv-label">CVV</label>
       <div class="cvv-frame"></div>
       <dib id="hint_cvv" class="cvv-hint hide">
-      <svg width="30" height="25"><line x1="0" y1="20" x2="30" y2="20" stroke="rgba(0, 0, 0, 0.3)"></line></svg>
+        <svg width="30" height="25">
+          <line x1="0" y1="20" x2="30" y2="20" stroke="rgba(0, 0, 0, 0.3)"></line>
+        </svg>
         <span>100</span>
       </dib>
     </div>
@@ -65,13 +73,21 @@
       <span></span>
       <span></span>
     </div>
+
+    <div class="checkmark draw"></div>
+
+    <!-- Cross -->
+    <svg class="container container--fail" viewBox="0 0 50 50">
+      <path class="container__path cross" fill="none" d="M16 16 34 34 M34 16 16 34"></path>
+    </svg>
+    <script>$(".container").toggle();</script>
   </button>
 </div>
+
 <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
 
 <!-- Socket IO -->
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 
 <!-- Your script -->
 <script src="./scripts/utils.js"></script>

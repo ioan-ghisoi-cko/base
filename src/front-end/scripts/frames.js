@@ -188,10 +188,31 @@ const payWithToken = (token) => {
     (data) => {
       console.log("API RESPONSE: ", data);
       payButtonLoader.style.display = "none";
-      payButtonText.innerHTML = data.approved ? "Approved!" : "Declined";
-      payButtonText.style.display = "block";
 
-      // TODO: Handle timeout error
+      // Payment approved
+      if (data.approved) {
+        payButton.style.backgroundColor = "rgba(108, 195, 180, 1)";
+        $(".checkmark").toggle();
+
+        window.setTimeout(() => {
+          $(".checkmark").toggle();
+          // TODO: Transition in "New Payment" with retry icon
+          payButtonText.innerHTML = "New Payment";
+          payButtonText.style.display = "block";
+        }, 750);
+      }
+      // Payment declined/timeout error
+      else {
+        payButton.style.backgroundColor = "#ED6077";
+        $(".container").toggle();
+
+        window.setTimeout(() => {
+          $(".container").toggle();
+          // TODO: Transition in "Retry" with retry icon
+          payButtonText.innerHTML = "Retry";
+          payButtonText.style.display = "block";
+        }, 750);
+      }
     }
   );
 };
