@@ -1,3 +1,6 @@
+document.querySelector('.checkmark').classList.add('hide');
+document.querySelector('.cross').classList.add('hide');
+
 var state = {
   "card-number": {
     isValid: false,
@@ -192,12 +195,10 @@ const payWithToken = (token) => {
       // Payment approved
       if (data.approved) {
         payButton.style.backgroundColor = "rgba(108, 195, 180, 1)";
-        $(".checkmark").toggle();
+        document.querySelector('.checkmark').classList.remove('hide')
 
         window.setTimeout(() => {
-          $(".checkmark").toggle();
-          // TODO: Transition in "New Payment" with retry icon
-          // refreshIcon.style.display = "inline-block"
+          document.querySelector('.checkmark').classList.add('hide')
           payButtonText.innerHTML =
             '<img id="refresh-icon" src="./images/refresh_white.png" alt="refresh" /> New Payment';
           payButtonText.style.display = "block";
@@ -206,12 +207,10 @@ const payWithToken = (token) => {
       // Payment declined/timeout error
       else {
         payButton.style.backgroundColor = "#ED6077";
-        $(".container").toggle();
+        document.querySelector('.cross').classList.remove('hide')
 
         window.setTimeout(() => {
-          $(".container").toggle();
-          // TODO: Transition in "Retry" with retry icon
-          // refreshIcon.style.display = "inline-block"
+          document.querySelector('.cross').classList.add('hide')
           payButtonText.innerHTML =
             '<img id="refresh-icon" src="./images/refresh_white.png" alt="refresh" /> Retry';
           payButtonText.style.display = "block";

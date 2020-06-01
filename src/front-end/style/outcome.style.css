@@ -1,7 +1,6 @@
 /* Success */
 
 .checkmark {
-  display: none;
   position: absolute;
   bottom: 2.3em;
   left: 8em;
@@ -57,17 +56,17 @@
 
 /* Fail */
 
-.container {
+.cross {
   width: 50px;
   height: 50px;
   position: absolute;
   bottom: 0px;
   left: 135px;
 }
-.container--fail .container__path {
+.cross--fail .cross__path {
   stroke: #ffffff;
 }
-.container--fail .cross {
+.cross--fail .draw {
   opacity: 1;
   stroke-width: 3.5px;
   transform-origin: 50% 50%;

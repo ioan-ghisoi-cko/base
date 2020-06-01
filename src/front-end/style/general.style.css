@@ -203,20 +203,11 @@ iframe {
   display: none;
 }
 
-/* #refresh-icon {
-    display: none;
-}
-
-#refresh-icon img {
-    height: 15px;
-    width: 12px;
-}
-
-#button-message {
-    display: inline-block;
-} */
-
 #refresh-icon {
   height: 15px;
   width: 12px;
+}
+
+.hide {
+  display: none;
 }
