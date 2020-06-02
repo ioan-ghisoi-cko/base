@@ -15,6 +15,8 @@ const hintCardNumber = document.getElementById("hint_number");
 const hintDate = document.getElementById("hint_date");
 const hintCvv = document.getElementById("hint_cvv");
 
+const toastBar = document.getElementById("toast_bar");
+
 const body = document.body;
 const switcher = document.getElementById('theme-switch');
 
@@ -125,5 +127,27 @@ const timeout = (ms, promise) => {
 // Socket part so we can handle webhooks:
 var socket = io();
 socket.on("webhook", (webhookBody) => {
-  console.log("WEBHOOK: ", webhookBody);
+  console.log(webhookBody);
+  let tempWebhook = webhookBody.replace("_", " ");
+
+  let newToast = document.createElement("div");
+  newToast.classList.add("toast_body");
+
+  // WEBHOOK div
+  let newWHDiv = document.createElement("div");
+  newWHDiv.innerHTML = "WEBHOOK";
+  newWHDiv.classList.add("wh_div");
+  newToast.appendChild(newWHDiv);
+
+  //Payment type div
+  let newPTDiv = document.createElement("div");
+  newPTDiv.innerHTML = tempWebhook;
+  newPTDiv.classList.add("pt_div");
+  newToast.appendChild(newPTDiv);
+
+  toastBar.append(newToast);
+  newToast.classList.add("show");
+  setTimeout(function () {
+    newToast.classList.remove("show");
+  }, 5000);
 });
