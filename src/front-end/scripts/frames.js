@@ -17,7 +17,7 @@ var state = {
 };
 
 Frames.init({
-  publicKey: "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a",
+  publicKey: "pk_test_7d9921be-b71f-47fa-b996-29515831d911",
   localization: {
     cardNumberPlaceholder: "•••• •••• •••• ••••",
     expiryMonthPlaceholder: "MM",
