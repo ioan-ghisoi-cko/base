@@ -39,14 +39,7 @@ const server = app.listen(port, () => {
 // Socket
 var io = socket(server);
 
-io.on("connection", (socket) => {
-  console.log("SOCKET", socket.id);
-  socket.on("pula", (data) => {
-    console.log(data);
-  });
-});
-
 app.post("/webhook", (req, res) => {
   io.emit("webhook", req.body.type);
-  res.sendStatus(200)
+  res.sendStatus(200);
 });
