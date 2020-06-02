@@ -32,11 +32,11 @@
 }
 
 .gray-dots span {
-    background: var(--frames-loader-colour);
+    background: var(--frames-loader-color);
 }
 
 .white-dots span {
-    background: var(--button-loader-colour);
+    background: var(--button-loader-color);
 }
 
 @keyframes bounce {

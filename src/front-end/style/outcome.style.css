@@ -18,8 +18,8 @@
   height: 2.5em;
   width: 0.75em;
   transform-origin: left top;
-  border-right: 3px solid #ffffff;
-  border-top: 3px solid #ffffff;
+  border-right: 3px solid var(--checkmark-color);
+  border-top: 3px solid var(--checkmark-color);
   content: "";
   left: 1.75em;
   top: 3.5em;
@@ -64,7 +64,7 @@
   left: 135px;
 }
 .cross--fail .cross__path {
-  stroke: #ffffff;
+  stroke: var(--cross-color);
 }
 .cross--fail .draw {
   opacity: 1;

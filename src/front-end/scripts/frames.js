@@ -1,5 +1,5 @@
-document.querySelector('.checkmark').classList.add('hide');
-document.querySelector('.cross').classList.add('hide');
+document.querySelector(".checkmark").classList.add("hide");
+document.querySelector(".cross").classList.add("hide");
 
 var state = {
   "card-number": {
@@ -19,42 +19,89 @@ var state = {
   },
 };
 
-Frames.init({
-  publicKey: "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a",
-  localization: {
-    cardNumberPlaceholder: "•••• •••• •••• ••••",
-    expiryMonthPlaceholder: "MM",
-    expiryYearPlaceholder: "YY",
-    cvvPlaceholder: "•••",
-  },
-  style: {
-    base: {
-      paddingLeft: "1rem",
-      borderRadius: "5px",
-      border: "1px solid rgba(0, 0, 0, 0.1)",
-      borderRadius: "5px",
-      fontSize: "14px",
-      fontFamily: "Arial, Helvetica, sans-serif",
-      lineHeight: "16px",
-      letterSpacing: "0.22px",
-    },
-    focus: {
-      border: "1px solid rgba(0, 0, 0, 0.3)",
-    },
-    invalid: {
-      border: "1px solid #D96830",
-    },
-    placeholder: {
-      base: {
-        fontSize: "12px", // Hide placeholder behind label when not floating
+initializeFrames();
+
+function initializeFrames() {
+  if (theme == "dark") {
+    Frames.init({
+      publicKey: "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a",
+      localization: {
+        cardNumberPlaceholder: "•••• •••• •••• ••••",
+        expiryMonthPlaceholder: "MM",
+        expiryYearPlaceholder: "YY",
+        cvvPlaceholder: "•••",
       },
-      focus: {
-        fontSize: "14px",
-        fontWeight: "300",
+      style: {
+        base: {
+          paddingLeft: "1rem",
+          borderRadius: "5px",
+          border: "1px solid gray",
+          borderRadius: "5px",
+          fontSize: "14px",
+          fontFamily: "Arial, Helvetica, sans-serif",
+          lineHeight: "16px",
+          letterSpacing: "0.22px",
+          color: "white",
+          transition: "unset",
+        },
+        focus: {
+          border: "1px solid lightGray",
+        },
+        invalid: {
+          border: "1px solid #D96830",
+        },
+        placeholder: {
+          base: {
+            fontSize: "12px", // Hide placeholder behind label when not floating
+          },
+          focus: {
+            fontSize: "14px",
+            fontWeight: "300",
+          },
+        },
       },
-    },
-  },
-});
+    });
+  } else {
+    Frames.init({
+      publicKey: "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a",
+      localization: {
+        cardNumberPlaceholder: "•••• •••• •••• ••••",
+        expiryMonthPlaceholder: "MM",
+        expiryYearPlaceholder: "YY",
+        cvvPlaceholder: "•••",
+      },
+      style: {
+        base: {
+          paddingLeft: "1rem",
+          borderRadius: "5px",
+          border: "1px solid rgba(0, 0, 0, 0.1)",
+          borderRadius: "5px",
+          fontSize: "14px",
+          fontFamily: "Arial, Helvetica, sans-serif",
+          lineHeight: "16px",
+          letterSpacing: "0.22px",
+          color: "#13395e",
+          transition: "unset",
+        },
+        focus: {
+          border: "1px solid rgba(0, 0, 0, 0.3)",
+        },
+        invalid: {
+          border: "1px solid #D96830",
+        },
+        placeholder: {
+          base: {
+            fontSize: "12px", // Hide placeholder behind label when not floating
+          },
+          focus: {
+            fontSize: "14px",
+            fontWeight: "300",
+          },
+        },
+      },
+    });
+  }
+}
 
 // When Frames is ready
 Frames.addEventHandler(Frames.Events.READY, (event) => {
@@ -194,25 +241,37 @@ const payWithToken = (token) => {
 
       // Payment approved
       if (data.approved) {
-        payButton.style.backgroundColor = "rgba(108, 195, 180, 1)";
-        document.querySelector('.checkmark').classList.remove('hide')
+        payButton.style.backgroundColor = "var(--pay-button-color)";
+        document.querySelector(".checkmark").classList.remove("hide");
 
         window.setTimeout(() => {
-          document.querySelector('.checkmark').classList.add('hide')
-          payButtonText.innerHTML =
-            '<img id="refresh-icon" src="./images/refresh_white.png" alt="refresh" /> New Payment';
+          document.querySelector(".checkmark").classList.add("hide");
+          // TODO: Switch buttons: New Payment > Pay Now
+          if (theme == "dark") {
+            payButtonText.innerHTML =
+              '<img id="refresh-icon" src="./images/refresh_black.png" alt="New Payment" /> New Payment';
+          } else {
+            payButtonText.innerHTML =
+              '<img id="refresh-icon" src="./images/refresh_white.png" alt="New Payment" /> New Payment';
+          }
+          initializeFrames();
           payButtonText.style.display = "block";
         }, 750);
       }
       // Payment declined/timeout error
       else {
-        payButton.style.backgroundColor = "#ED6077";
-        document.querySelector('.cross').classList.remove('hide')
+        payButton.style.backgroundColor = "var(--fail-color)";
+        document.querySelector(".cross").classList.remove("hide");
 
         window.setTimeout(() => {
-          document.querySelector('.cross').classList.add('hide')
-          payButtonText.innerHTML =
-            '<img id="refresh-icon" src="./images/refresh_white.png" alt="refresh" /> Retry';
+          document.querySelector(".cross").classList.add("hide");
+          if (theme == "dark") {
+            payButtonText.innerHTML =
+              '<img id="refresh-icon" src="./images/refresh_black.png" alt="refresh" /> Retry';
+          } else {
+            payButtonText.innerHTML =
+              '<img id="refresh-icon" src="./images/refresh_white.png" alt="refresh" /> Retry';
+          }
           payButtonText.style.display = "block";
         }, 750);
       }

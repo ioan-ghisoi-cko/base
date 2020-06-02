@@ -15,6 +15,52 @@ const hintCardNumber = document.getElementById("hint_number");
 const hintDate = document.getElementById("hint_date");
 const hintCvv = document.getElementById("hint_cvv");
 
+const body = document.body;
+const switcher = document.getElementById('theme-switch');
+
+// Default theme to user's system preference
+const userPrefers = getComputedStyle(document.documentElement).getPropertyValue('content');
+let theme = userPrefers;
+
+// Apply cached theme on reload
+theme = localStorage.getItem('theme');
+
+if (theme) {
+  body.classList.add(theme);
+  if (theme == 'dark') {
+    switcher.checked = true;
+  }
+}
+
+// Dark mode switch
+document.getElementById("theme-switch").addEventListener("change", (event) => {
+  themeSwitch(event);
+});
+
+const themeSwitch = (event) => {
+  if (event.target.checked) {
+    // Dark mode
+    body.classList.replace('light','dark');
+    setTheme('dark');
+    getTheme();
+    initializeFrames();
+	} else {
+    // Light mode
+    body.classList.replace('dark','light');
+    setTheme('light');
+    getTheme();
+    initializeFrames();
+	}
+}
+
+function getTheme() {
+  theme = localStorage.getItem('theme');
+}
+
+function setTheme(mode) {
+  localStorage.setItem('theme', mode);
+}
+
 // Show the loading animation until Frames is ready
 framesLoader.style.display = "flex";
 
