@@ -1,6 +1,6 @@
 const route = require("express").Router();
 const { Checkout } = require("checkout-sdk-node");
-const cko = new Checkout("sk_test_07fa5e52-3971-4bab-ae6b-a8e26007fccc");
+const cko = new Checkout("sk_test_0b9b5db6-f223-49d0-b68f-f6643dd4f808");
 
 route.post("/payWithToken", async (req, res) => {
   console.log(req.body.token);

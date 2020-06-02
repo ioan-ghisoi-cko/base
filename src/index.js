@@ -41,14 +41,12 @@ var io = socket(server);
 
 io.on("connection", (socket) => {
   console.log("SOCKET", socket.id);
-
   socket.on("pula", (data) => {
-    console.log("This" + data);
+    console.log(data);
   });
 });
 
 app.post("/webhook", (req, res) => {
   io.emit("webhook", req.body.type);
-  // console.log(req.body)
   res.sendStatus(200)
 });
