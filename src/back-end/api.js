@@ -1,6 +1,6 @@
 const route = require("express").Router();
 const { Checkout } = require("checkout-sdk-node");
-const cko = new Checkout("sk_test_0b9b5db6-f223-49d0-b68f-f6643dd4f808");
+const cko = new Checkout("sk_test_07fa5e52-3971-4bab-ae6b-a8e26007fccc");
 
 route.post("/payWithToken", async (req, res) => {
   console.log(req.body.token);
@@ -9,7 +9,7 @@ route.post("/payWithToken", async (req, res) => {
       token: req.body.token,
     },
     currency: "GBP",
-    amount: 2500, // pence
+    amount: 400, // pence
     reference: "TEST-ORDER",
   });
   res.send(payment);

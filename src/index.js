@@ -43,11 +43,12 @@ io.on("connection", (socket) => {
   console.log("SOCKET", socket.id);
 
   socket.on("pula", (data) => {
-    console.log(data);
+    console.log("This" + data);
   });
 });
 
 app.post("/webhook", (req, res) => {
-  io.emit("webhook", req.body);
-  res.send(200);
+  io.emit("webhook", req.body.type);
+  // console.log(req.body)
+  res.sendStatus(200)
 });
