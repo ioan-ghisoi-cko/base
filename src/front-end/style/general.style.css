@@ -129,7 +129,10 @@ body {
 
 /* Remove autofill color */
 
-input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
   box-shadow: 0 0 0 30px white inset !important;
 }
@@ -241,11 +244,11 @@ iframe {
   margin-bottom: 8px;
 }
 
-.date-and-code>div:nth-child(1) {
+.date-and-code > div:nth-child(1) {
   margin-right: 5px;
 }
 
-.date-and-code>div:nth-child(2) {
+.date-and-code > div:nth-child(2) {
   margin-left: 5px;
 }
 

@@ -18,18 +18,20 @@ const hintCvv = document.getElementById("hint_cvv");
 const toastBar = document.getElementById("toast_bar");
 
 const body = document.body;
-const switcher = document.getElementById('theme-switch');
+const switcher = document.getElementById("theme-switch");
 
 // Default theme to user's system preference
-const userPrefers = getComputedStyle(document.documentElement).getPropertyValue('content');
+const userPrefers = getComputedStyle(document.documentElement).getPropertyValue(
+  "content"
+);
 let theme = userPrefers;
 
 // Apply cached theme on reload
-theme = localStorage.getItem('theme');
+theme = localStorage.getItem("theme");
 
 if (theme) {
   body.classList.add(theme);
-  if (theme == 'dark') {
+  if (theme == "dark") {
     switcher.checked = true;
   }
 }
@@ -42,25 +44,25 @@ document.getElementById("theme-switch").addEventListener("change", (event) => {
 const themeSwitch = (event) => {
   if (event.target.checked) {
     // Dark mode
-    body.classList.replace('light','dark');
-    setTheme('dark');
+    body.classList.replace("light", "dark");
+    setTheme("dark");
     getTheme();
     initializeFrames();
-	} else {
+  } else {
     // Light mode
-    body.classList.replace('dark','light');
-    setTheme('light');
+    body.classList.replace("dark", "light");
+    setTheme("light");
     getTheme();
     initializeFrames();
-	}
-}
+  }
+};
 
 function getTheme() {
-  theme = localStorage.getItem('theme');
+  theme = localStorage.getItem("theme");
 }
 
 function setTheme(mode) {
-  localStorage.setItem('theme', mode);
+  localStorage.setItem("theme", mode);
 }
 
 // Show the loading animation until Frames is ready
