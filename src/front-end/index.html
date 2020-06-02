@@ -7,6 +7,7 @@
   <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="./style/general.style.css" />
   <link rel="stylesheet" href="./style/loader.style.css" />
+  <link rel="stylesheet" href="./style/outcome.style.css" />
 </head>
 
 <!-- Webhook Toasts -->
@@ -68,19 +69,28 @@
   </div>
 
   <button id="pay-button" disabled="">
+    <!-- <span id="refresh-icon"><img src="./images/refresh_white.png" alt="refresh"></span> -->
     <div id="button-message">Pay Now</div>
     <div id="button-dots" class="dots white-dots">
       <span></span>
       <span></span>
       <span></span>
     </div>
+
+    <div class="checkmark draw"></div>
+
+    <!-- Cross -->
+    <svg class="cross cross--fail" viewBox="0 0 50 50">
+      <path class="cross__path draw" fill="none" d="M16 16 34 34 M34 16 16 34"></path>
+    </svg>
+
   </button>
 </div>
+
 <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
 
 <!-- Socket IO -->
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 
 <!-- Your script -->
 <script src="./scripts/utils.js"></script>

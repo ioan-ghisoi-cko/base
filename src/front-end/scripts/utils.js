@@ -7,6 +7,7 @@ const cardLabel = document.getElementById("card-label");
 const dateLabel = document.getElementById("date-label");
 const cvvLabel = document.getElementById("cvv-label");
 const payButton = document.getElementById("pay-button");
+const refreshIcon = document.getElementById("refresh-icon");
 const payButtonText = document.getElementById("button-message");
 const payButtonLoader = document.getElementById("button-dots");
 
