@@ -13,11 +13,7 @@
   --light-red: #d96830;
   --red: #ec5f77;
   --green: #6cc3b4;
-  --blue0: #13395e;
-  --blue1: rgba(19, 57, 94, 0.4);
-  --blue2: #000839;
   --yellow: #ffa41b;
-  --orange: #d96830;
 }
 
 .light {
@@ -33,7 +29,6 @@
   --button-background: var(--green);
   --button-background-error: var(--red);
   --button-text: var(--white);
-  --switch-background-color: var(--blue0);
   --switch-moon-color: var(--white);
   --switch-sun-color: var(--yellow);
   --switch-border-color: var(--white);
@@ -52,7 +47,6 @@
   --button-background: var(--white);
   --button-background-error: var(--red);
   --button-text: var(--black);
-  --switch-background-color: var(--black);
   --switch-moon-color: var(--white);
   --switch-sun-color: var(--yellow);
   --switch-border-color: var(--white);
@@ -486,7 +480,7 @@ iframe {
   width: 62px;
   height: 30px;
   border-radius: 40px;
-  background-color: var(--switch-background-color);
+  background-color: var(--black);
   outline: none;
   border-color: var(--switch-border-color);
   box-shadow: 0 0 10px var(--switch-border-color);
@@ -512,7 +506,7 @@ label.switch:before {
 }
 
 label.switch:after {
-  background-color: var(--switch-background-color);
+  background-color: var(--black);
   left: -18px;
 }
 
