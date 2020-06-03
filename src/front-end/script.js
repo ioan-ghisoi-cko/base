@@ -38,6 +38,8 @@ const hideCross = () => {
   outcome.innerHTML = crossHidden;
 };
 
+const publicKey = "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a"
+
 const handleResponse = (data) => {
   payLoader.classList.add("hide");
   // Payment approved
