@@ -60,14 +60,10 @@
     <div class="button-area">
       <button id="pay-button" class="pay" disabled>Pay Now </button>
       <div class="loader pay-loader hide"></div>
-      <div class="checkmark"></div>
-      <!-- Cross -->
-      <svg class="cross cross--fail" viewBox="0 0 50 50">
-        <path class="cross__path draw" fill="none" d="M16 16 34 34 M34 16 16 34"></path>
-      </svg>
-      <!-- TODO: General "outcome" div - load checkmark/cross dynamically  -->
+      <div id="outcome"></div>
     </div>
     <!-- TODO: Add error hint to indicate payment declined / timeout to user-->
+  </div>
   </div>
 
   <!-- Checkout.com CDN -->

@@ -11,20 +11,41 @@ const cardHint = document.querySelector(".card-hint");
 const dateHint = document.querySelector(".expiry-date-hint");
 const cvvHint = document.querySelector(".cvv-hint");
 const payLoader = document.querySelector(".pay-loader");
-const checkMark = document.querySelector(".checkmark");
-const cross = document.querySelector(".cross");
 const toastBar = document.getElementById("toast_bar");
 const switcher = document.getElementById("theme-switch");
+
 let theme;
-cross.classList.add("hide");
+let outcome = document.getElementById("outcome");
+
+const crossVisible =
+  '<svg class="cross" viewBox="0 0 50 50"><path class="cross draw" fill="none" d="M16 16 34 34 M34 16 16 34"></path></svg>';
+const crossHidden =
+  '<svg class="cross hide" viewBox="0 0 50 50"><path class="cross draw" fill="none" d="M16 16 34 34 M34 16 16 34"></path></svg>';
+
+const showCheckmark = () => {
+  outcome.classList.add("checkmark", "draw");
+};
+const hideCheckmark = () => {
+  outcome.classList.remove("checkmark", "draw");
+};
+
+const showCross = () => {
+  outcome.class = "cross";
+  outcome.innerHTML = crossVisible;
+};
+const hideCross = () => {
+  outcome.classList.remove("cross");
+  outcome.innerHTML = crossHidden;
+};
 
 const handleResponse = (data) => {
   payLoader.classList.add("hide");
   // Payment approved
   if (data.approved) {
     payButton.style.backgroundColor = "var(--button-background)";
-    checkMark.classList.add("draw");
+    showCheckmark();
     setTimeout(() => {
+      hideCheckmark();
       payButton.innerHTML = "&#10227; New Payment";
       // TODO: Disable form inputs until Frames re-initialized (user clicks "New Payment")
     }, 1200);
@@ -32,9 +53,9 @@ const handleResponse = (data) => {
   // Payment declined / timeout error
   else {
     payButton.style.backgroundColor = "var(--button-background-error)";
-    cross.classList.remove("hide");
+    showCross();
     setTimeout(() => {
-      cross.classList.add("hide");
+      hideCross();
       payButton.innerHTML = "&#10227; Retry";
     }, 1200);
   }
@@ -70,7 +91,8 @@ const cleanState = () => {
       isFocused: false,
     },
   };
-  checkMark.classList.remove("draw");
+  hideCheckmark();
+  hideCross();
 };
 
 // utility function to send HTTP calls to our back end API
