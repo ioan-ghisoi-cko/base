@@ -71,10 +71,8 @@ body {
 }
 
 /* Remove autofill color */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px var(--background) inset !important;
   box-shadow: 0 0 0 30px var(--background) inset !important;
 }
@@ -206,7 +204,7 @@ iframe {
 }
 
 .pay:disabled {
-  background-color: var(--button-background-disabled);
+  background-color: var(--button-background-disabled) !important;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -217,9 +215,7 @@ iframe {
 
 /* Loader */
 
-.loader,
-.loader:before,
-.loader:after {
+.loader, .loader:before, .loader:after {
   border-radius: 50%;
   width: 1em;
   height: 1em;
@@ -250,8 +246,7 @@ iframe {
   clip-path: circle(60px at center);
 }
 
-.loader:before,
-.loader:after {
+.loader:before, .loader:after {
   content: "";
   position: absolute;
   top: 0;
@@ -268,9 +263,7 @@ iframe {
 }
 
 @-webkit-keyframes loading {
-  0%,
-  80%,
-  100% {
+  0%, 80%, 100% {
     box-shadow: 0 2.5em 0 -1.3em;
   }
   40% {
@@ -279,9 +272,7 @@ iframe {
 }
 
 @keyframes loading {
-  0%,
-  80%,
-  100% {
+  0%, 80%, 100% {
     box-shadow: 0 2.5em 0 -1.3em;
   }
   40% {
@@ -503,8 +494,7 @@ iframe {
   cursor: pointer;
 }
 
-label.switch:before,
-label.switch:after {
+label.switch:before, label.switch:after {
   display: block;
   position: absolute;
   content: "";
@@ -530,13 +520,13 @@ input[type="checkbox"] {
   display: none;
 }
 
-input[type="checkbox"]:checked + label:before {
+input[type="checkbox"]:checked+label:before {
   background-color: var(--switch-moon-color);
   -webkit-transform: translateX(32px);
   transform: translateX(32px);
 }
 
-input[type="checkbox"]:checked + label:after {
+input[type="checkbox"]:checked+label:after {
   -webkit-transform: translateX(48px) scale(1);
   transform: translateX(48px) scale(1);
 }
