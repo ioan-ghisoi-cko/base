@@ -96,6 +96,7 @@ const timeout = (ms, promise) => {
 var socket = io();
 socket.on("webhook", (webhookBody) => {
   console.log(webhookBody);
+  toastBar.classList.remove("hide")
   let tempWebhook = webhookBody.replace("_", " ");
 
   let newToast = document.createElement("div");
@@ -117,6 +118,7 @@ socket.on("webhook", (webhookBody) => {
   newToast.classList.add("show");
   setTimeout(function () {
     newToast.classList.remove("show");
+    toastBar.classList.add("hide")
   }, 5000);
 });
 
