@@ -12,22 +12,37 @@ const dateHint = document.querySelector(".expiry-date-hint");
 const cvvHint = document.querySelector(".cvv-hint");
 const payLoader = document.querySelector(".pay-loader");
 const checkMark = document.querySelector(".checkmark");
+const cross = document.querySelector(".cross");
 const toastBar = document.getElementById("toast_bar");
 const switcher = document.getElementById("theme-switch");
 let theme;
+cross.classList.add("hide");
 
 const handleResponse = (data) => {
   payLoader.classList.add("hide");
+  // Payment approved
   if (data.approved) {
+    payButton.style.backgroundColor = "var(--button-background)";
     checkMark.classList.add("draw");
     setTimeout(() => {
-      payButton.innerHTML = "&#x21bb; New Payment";
+      payButton.innerHTML = "&#10227; New Payment";
+      // TODO: Disable form inputs until Frames re-initialized (user clicks "New Payment")
+    }, 1200);
+  }
+  // Payment declined / timeout error
+  else {
+    payButton.style.backgroundColor = "var(--button-background-error)";
+    cross.classList.remove("hide");
+    setTimeout(() => {
+      cross.classList.add("hide");
+      payButton.innerHTML = "&#10227; Retry";
     }, 1200);
   }
 };
 
 const cleanState = () => {
   payButton.innerHTML = "Pay Now";
+  payButton.style.backgroundColor = "var(--button-background)";
   pageLoader.style.display = "";
   form.style.display = "none";
   initializeFrames();
@@ -127,6 +142,7 @@ theme = localStorage.getItem("theme");
 if (theme) {
   document.body.classList.add(theme);
   if (theme == "dark") {
+    // TODO: Skip dark switch animation when loading stored preference
     switcher.checked = true;
   }
 }
