@@ -1,7 +1,7 @@
 const initializeFrames = () => {
   if (theme == "dark") {
     Frames.init({
-      publicKey: "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a",
+      publicKey: publicKey,
       localization: {
         cardNumberPlaceholder: "•••• •••• •••• ••••",
         expiryMonthPlaceholder: "MM",
@@ -40,7 +40,7 @@ const initializeFrames = () => {
     });
   } else {
     Frames.init({
-      publicKey: "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a",
+      publicKey: publicKey,
       localization: {
         cardNumberPlaceholder: "•••• •••• •••• ••••",
         expiryMonthPlaceholder: "MM",
