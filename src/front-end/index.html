@@ -4,8 +4,8 @@
 <head>
   <title>Payment Demo</title>
   <link rel="stylesheet" href="./style.css" />
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+  <link rel="icon" href="./images/favicon.ico" type="image/ico" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 </head>
 
 <body class="light">
@@ -26,8 +26,7 @@
     <!-- Cardholder Name -->
     <div class="input-wrapper name">
       <label id="name-label" for="name-input">Cardholder Name</label>
-      <input type="text" name="cc-name" id="cardholder" placeholder="John Smith"
-        autocomplete="cc-name">
+      <input type="text" name="cc-name" id="cardholder" placeholder="John Smith" autocomplete="cc-name">
     </div>
 
     <!-- Card Number -->
@@ -62,7 +61,13 @@
       <button id="pay-button" class="pay" disabled>Pay Now </button>
       <div class="loader pay-loader hide"></div>
       <div class="checkmark"></div>
+      <!-- Cross -->
+      <svg class="cross cross--fail" viewBox="0 0 50 50">
+        <path class="cross__path draw" fill="none" d="M16 16 34 34 M34 16 16 34"></path>
+      </svg>
+      <!-- TODO: General "outcome" div - load checkmark/cross dynamically  -->
     </div>
+    <!-- TODO: Add error hint to indicate payment declined / timeout to user-->
   </div>
 
   <!-- Checkout.com CDN -->
