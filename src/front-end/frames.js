@@ -1,5 +1,86 @@
-document.querySelector(".checkmark").classList.add("hide");
-document.querySelector(".cross").classList.add("hide");
+const initializeFrames = () => {
+  if (theme == "dark") {
+    Frames.init({
+      publicKey: "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a",
+      localization: {
+        cardNumberPlaceholder: "•••• •••• •••• ••••",
+        expiryMonthPlaceholder: "MM",
+        expiryYearPlaceholder: "YY",
+        cvvPlaceholder: "•••",
+      },
+      style: {
+        base: {
+          paddingLeft: "1rem",
+          borderRadius: "5px",
+          border: "1px solid #292929",
+          borderRadius: "5px",
+          fontSize: "14px",
+          fontFamily: "Arial, Helvetica, sans-serif",
+          lineHeight: "16px",
+          letterSpacing: "0.22px",
+          color: "white",
+          transition: "unset",
+        },
+        focus: {
+          border: "1px solid #b2b2b2",
+        },
+        invalid: {
+          border: "1px solid #D96830",
+        },
+        placeholder: {
+          base: {
+            fontSize: "5px", // Hide placeholder behind label when not floating
+          },
+          focus: {
+            fontSize: "14px",
+            fontWeight: "300",
+          },
+        },
+      },
+    });
+  } else {
+    Frames.init({
+      publicKey: "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a",
+      localization: {
+        cardNumberPlaceholder: "•••• •••• •••• ••••",
+        expiryMonthPlaceholder: "MM",
+        expiryYearPlaceholder: "YY",
+        cvvPlaceholder: "•••",
+      },
+      style: {
+        base: {
+          paddingLeft: "1rem",
+          borderRadius: "5px",
+          border: "1px solid #E2E2E2",
+          borderRadius: "5px",
+          color: "#000",
+          transition: "unset",
+          fontSize: "14px",
+          fontFamily: "Arial, Helvetica, sans-serif",
+          lineHeight: "16px",
+          letterSpacing: "0.22px",
+        },
+        focus: {
+          border: "1px solid rgba(0, 0, 0, 0.3)",
+        },
+        invalid: {
+          border: "1px solid #D96830",
+        },
+        placeholder: {
+          base: {
+            color: "#e2e2e2",
+            fontSize: "5px", // Hide placeholder behind label when not floating
+          },
+          focus: {
+            fontSize: "14px",
+          },
+        },
+      },
+    });
+  }
+};
+
+initializeFrames();
 
 var state = {
   "card-number": {
@@ -19,94 +100,28 @@ var state = {
   },
 };
 
-initializeFrames();
-
-function initializeFrames() {
-  if (theme == "dark") {
-    Frames.init({
-      publicKey: "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a",
-      localization: {
-        cardNumberPlaceholder: "•••• •••• •••• ••••",
-        expiryMonthPlaceholder: "MM",
-        expiryYearPlaceholder: "YY",
-        cvvPlaceholder: "•••",
-      },
-      style: {
-        base: {
-          paddingLeft: "1rem",
-          borderRadius: "5px",
-          border: "1px solid gray",
-          borderRadius: "5px",
-          fontSize: "14px",
-          fontFamily: "Arial, Helvetica, sans-serif",
-          lineHeight: "16px",
-          letterSpacing: "0.22px",
-          color: "white",
-          transition: "unset",
-        },
-        focus: {
-          border: "1px solid lightGray",
-        },
-        invalid: {
-          border: "1px solid #D96830",
-        },
-        placeholder: {
-          base: {
-            fontSize: "12px", // Hide placeholder behind label when not floating
-          },
-          focus: {
-            fontSize: "14px",
-            fontWeight: "300",
-          },
-        },
-      },
-    });
-  } else {
-    Frames.init({
-      publicKey: "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a",
-      localization: {
-        cardNumberPlaceholder: "•••• •••• •••• ••••",
-        expiryMonthPlaceholder: "MM",
-        expiryYearPlaceholder: "YY",
-        cvvPlaceholder: "•••",
-      },
-      style: {
-        base: {
-          paddingLeft: "1rem",
-          borderRadius: "5px",
-          border: "1px solid rgba(0, 0, 0, 0.1)",
-          borderRadius: "5px",
-          fontSize: "14px",
-          fontFamily: "Arial, Helvetica, sans-serif",
-          lineHeight: "16px",
-          letterSpacing: "0.22px",
-          color: "#13395e",
-          transition: "unset",
-        },
-        focus: {
-          border: "1px solid rgba(0, 0, 0, 0.3)",
-        },
-        invalid: {
-          border: "1px solid #D96830",
-        },
-        placeholder: {
-          base: {
-            fontSize: "12px", // Hide placeholder behind label when not floating
-          },
-          focus: {
-            fontSize: "14px",
-            fontWeight: "300",
-          },
-        },
-      },
-    });
-  }
-}
-
 // When Frames is ready
 Frames.addEventHandler(Frames.Events.READY, (event) => {
-  framesLoader.style.display = "none";
+  pageLoader.style.display = "none";
   form.style.display = "block";
+});
+
+// When the name input is focused
+nameInput.addEventListener("focus", () => {
+  nameLabel.classList.add("up");
+  nameInput.classList.remove("invalid");
+});
+
+// When the name input is blurred
+nameInput.addEventListener("blur", (event) => {
+  if (nameInput.value === "") {
+    nameLabel.classList.remove("up");
+  } else if (nameInput.value.length < 2) {
+    nameInput.classList.add("invalid");
+  } else {
+    // Update the cardholder name in Frames
+    Frames.cardholder.name = nameInput.value;
+  }
 });
 
 // When a Frames input is focused
@@ -114,19 +129,18 @@ Frames.addEventHandler(Frames.Events.FRAME_FOCUS, (event) => {
   // Float the label up when the field is focused
   switch (event.element) {
     case "card-number":
-      cardLabel.classList.add("float-up");
-      hintCardNumber.classList.remove("hide");
+      cardLabel.classList.add("up");
+      cardHint.classList.remove("hide");
       break;
     case "expiry-date":
-      dateLabel.classList.add("float-up");
-      hintDate.classList.remove("hide");
+      dateLabel.classList.add("up");
+      dateHint.classList.remove("hide");
       break;
     case "cvv":
-      cvvLabel.classList.add("float-up");
-      hintCvv.classList.remove("hide");
+      cvvLabel.classList.add("up");
+      cvvHint.classList.remove("hide");
       break;
   }
-
   state[event.element].isFocused = true;
 });
 
@@ -136,26 +150,26 @@ Frames.addEventHandler(Frames.Events.FRAME_BLUR, (event) => {
   switch (event.element) {
     case "card-number":
       if (state["card-number"].isEmpty) {
-        cardLabel.classList.remove("float-up");
-        hintCardNumber.classList.add("hide");
+        cardLabel.classList.remove("up");
+        cardHint.classList.add("hide");
       } else if (state["card-number"].isValid) {
-        hintCardNumber.classList.add("hide");
+        cardHint.classList.add("hide");
       }
       break;
     case "expiry-date":
       if (state["expiry-date"].isEmpty) {
-        dateLabel.classList.remove("float-up");
-        hintDate.classList.add("hide");
+        dateLabel.classList.remove("up");
+        dateHint.classList.add("hide");
       } else if (state["expiry-date"].isValid) {
-        hintDate.classList.add("hide");
+        dateHint.classList.add("hide");
       }
       break;
     case "cvv":
       if (state["card-number"].isEmpty) {
-        cvvLabel.classList.remove("float-up");
-        hintCvv.classList.add("hide");
+        cvvLabel.classList.remove("up");
+        cvvHint.classList.add("hide");
       } else if (state["card-number"].isValid) {
-        hintCvv.classList.add("hide");
+        cvvHint.classList.add("hide");
       }
       break;
   }
@@ -168,18 +182,18 @@ Frames.addEventHandler(Frames.Events.FRAME_VALIDATION_CHANGED, (event) => {
   switch (event.element) {
     case "card-number":
       event.isEmpty && !state[event.element].isFocused
-        ? cardLabel.classList.remove("float-up")
-        : cardLabel.classList.add("float-up");
+        ? cardLabel.classList.remove("up")
+        : cardLabel.classList.add("up");
       break;
     case "expiry-date":
       event.isEmpty && !state[event.element].isFocused
-        ? dateLabel.classList.remove("float-up")
-        : dateLabel.classList.add("float-up");
+        ? dateLabel.classList.remove("up")
+        : dateLabel.classList.add("up");
       break;
     case "cvv":
       event.isEmpty && !state[event.element].isFocused
-        ? cvvLabel.classList.remove("float-up")
-        : cvvLabel.classList.add("float-up");
+        ? cvvLabel.classList.remove("up")
+        : cvvLabel.classList.add("up");
       break;
   }
 
@@ -199,17 +213,15 @@ Frames.addEventHandler(Frames.Events.CARD_VALIDATION_CHANGED, (event) => {
 
 // When frames detect the payment method
 Frames.addEventHandler(Frames.Events.PAYMENT_METHOD_CHANGED, (event) => {
-  var pm = event.paymentMethod;
-
-  let container = document.querySelector(".icon-container.payment-method");
+  const pm = event.paymentMethod;
 
   if (!pm) {
-    paymentMethodIcon.style.setProperty("display", "none");
+    scheme.style.setProperty("display", "none");
   } else {
     var name = pm.toLowerCase();
-    paymentMethodIcon.setAttribute("src", "images/card-icons/" + name + ".svg");
-    paymentMethodIcon.setAttribute("alt", pm || "payment method");
-    paymentMethodIcon.style.setProperty("display", "block");
+    scheme.setAttribute("src", "images/card-icons/" + name + ".svg");
+    scheme.setAttribute("alt", pm || "payment method");
+    scheme.style.setProperty("display", "block");
   }
 });
 
@@ -220,11 +232,15 @@ Frames.addEventHandler(Frames.Events.CARD_TOKENIZED, (event) => {
 
 // When the pay button is clicked
 payButton.addEventListener("click", function (event) {
-  event.preventDefault();
-  payButtonText.style.display = "none";
-  payButtonLoader.style.display = "flex";
-  Frames.submitCard();
-  Frames.enableSubmitForm();
+  if (payButton.innerHTML.includes("New")) {
+    cleanState();
+  } else {
+    event.preventDefault();
+    payButton.innerHTML = "";
+    payLoader.classList.remove("hide");
+    Frames.submitCard();
+    Frames.enableSubmitForm();
+  }
 });
 
 // We call our Back End server to process the payment with the token
@@ -236,45 +252,9 @@ const payWithToken = (token) => {
       body: { token: token },
     },
     (data) => {
+      payLoader.classList.add("hide");
       console.log("API RESPONSE: ", data);
-      payButtonLoader.style.display = "none";
-
-      // Payment approved
-      if (data.approved) {
-        payButton.style.backgroundColor = "var(--pay-button-color)";
-        document.querySelector(".checkmark").classList.remove("hide");
-
-        window.setTimeout(() => {
-          document.querySelector(".checkmark").classList.add("hide");
-          // TODO: Switch buttons: New Payment > Pay Now
-          if (theme == "dark") {
-            payButtonText.innerHTML =
-              '<img id="refresh-icon" src="./images/refresh_black.png" alt="New Payment" /> New Payment';
-          } else {
-            payButtonText.innerHTML =
-              '<img id="refresh-icon" src="./images/refresh_white.png" alt="New Payment" /> New Payment';
-          }
-          initializeFrames();
-          payButtonText.style.display = "block";
-        }, 750);
-      }
-      // Payment declined/timeout error
-      else {
-        payButton.style.backgroundColor = "var(--fail-color)";
-        document.querySelector(".cross").classList.remove("hide");
-
-        window.setTimeout(() => {
-          document.querySelector(".cross").classList.add("hide");
-          if (theme == "dark") {
-            payButtonText.innerHTML =
-              '<img id="refresh-icon" src="./images/refresh_black.png" alt="refresh" /> Retry';
-          } else {
-            payButtonText.innerHTML =
-              '<img id="refresh-icon" src="./images/refresh_white.png" alt="refresh" /> Retry';
-          }
-          payButtonText.style.display = "block";
-        }, 750);
-      }
+      handleResponse(data);
     }
   );
 };
