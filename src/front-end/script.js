@@ -13,6 +13,8 @@ const cvvHint = document.querySelector(".cvv-hint");
 const payLoader = document.querySelector(".pay-loader");
 const toastBar = document.getElementById("toast_bar");
 const switcher = document.getElementById("theme-switch");
+const inputBarrier = document.getElementById("input-barrier");
+// const buttonBarrier = document.getElementById("button-barrier");
 
 let theme;
 let outcome = document.getElementById("outcome");
@@ -49,7 +51,10 @@ const handleResponse = (data) => {
     setTimeout(() => {
       hideCheckmark();
       payButton.innerHTML = "&#10227; New Payment";
-      // TODO: Disable form inputs until Frames re-initialized (user clicks "New Payment")
+      // // Restore pay button access
+      // buttonBarrier.style.display = "none";
+      // Disable form inputs until Frames reloaded (user clicks "New Payment")
+      inputBarrier.style.display = "block";
     }, 1200);
   }
   // Payment declined / timeout error
@@ -59,6 +64,8 @@ const handleResponse = (data) => {
     setTimeout(() => {
       hideCross();
       payButton.innerHTML = "&#10227; Retry";
+      // // Restore pay button access
+      // buttonBarrier.style.display = "none";
     }, 1200);
   }
 };
@@ -95,6 +102,7 @@ const cleanState = () => {
   };
   hideCheckmark();
   hideCross();
+  inputBarrier.style.display = "none";
 };
 
 // utility function to send HTTP calls to our back end API

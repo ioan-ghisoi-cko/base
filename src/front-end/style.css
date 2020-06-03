@@ -540,3 +540,21 @@ input[type="checkbox"]:checked + label:after {
   -webkit-transform: translateX(48px) scale(1);
   transform: translateX(48px) scale(1);
 }
+
+#input-barrier {
+  background: none;
+  width: var(--payment-form-width);
+  height: 200px;
+  position: absolute;
+  z-index: 1;
+  display: none;
+}
+
+/* #button-barrier {
+  background: blue;
+  width: var(--payment-form-width);
+  height: var(--input-height);
+  position: absolute;
+  z-index: 1;
+  display: none;
+} */
