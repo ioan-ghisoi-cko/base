@@ -133,7 +133,6 @@ const timeout = (ms, promise) => {
 var socket = io();
 socket.on("webhook", (webhookBody) => {
   console.log(webhookBody);
-  toastBar.classList.remove("hide")
   let tempWebhook = webhookBody.replace("_", " ");
 
   let newToast = document.createElement("div");
