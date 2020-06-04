@@ -12,7 +12,8 @@
   --darker-gray: #292929;
   --light-red: #d96830;
   --red: #ec5f77;
-  --green: #6cc3b4;
+  --blue-green: #6cc3b4;
+  --green: #64d39b;
   --yellow: #ffa41b;
 }
 
@@ -22,11 +23,12 @@
   --input-border: var(--light-gray);
   --input-border-focus: var(--gray);
   --input-border-error: var(--light-red);
+  --input-border-success: var(--green);
   --placeholder: var(--light-gray);
   --label: var(--medium-gray);
   --label-focus: var(--gray);
   --button-background-disabled: var(--light-gray);
-  --button-background: var(--green);
+  --button-background: var(--blue-green);
   --button-background-error: var(--red);
   --button-text: var(--white);
   --switch-moon-color: var(--white);
@@ -40,6 +42,7 @@
   --input-border: var(--darker-gray);
   --input-border-focus: var(--dark-gray);
   --input-border-error: var(--light-red);
+  --input-border-success: var(--green);
   --placeholder: var(--dark-gray);
   --label: var(--white);
   --label-focus: var(--light-gray);
@@ -64,11 +67,18 @@ body {
   background: var(--background);
 }
 
-/* Remove autofill color */
-
-input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+/* Set autofill colour */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px var(--background) inset !important;
   box-shadow: 0 0 0 30px var(--background) inset !important;
+}
+
+/* Set autofill text colour*/
+input:-webkit-autofill {
+  -webkit-text-fill-color: var(--input-text) !important;
 }
 
 iframe {
@@ -86,7 +96,7 @@ iframe {
   width: var(--payment-form-width);
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 46.5%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
@@ -96,7 +106,7 @@ iframe {
 #cardholder {
   padding-left: 1rem;
   height: 50px;
-  width: calc(100% - 1rem);
+  width: calc(100% - 1.1rem);
   border-radius: 5px;
   border: 1px solid var(--input-border);
   color: var(--input-text);
@@ -106,6 +116,10 @@ iframe {
 
 #cardholder.invalid {
   border: 1px solid var(--input-border-error);
+}
+
+#cardholder.success {
+  border: 1px solid var(--input-border-success);
 }
 
 #cardholder:focus {
@@ -176,7 +190,7 @@ iframe {
 /* Payment button */
 
 .button-area {
-  position: relative;
+  position: fixed;
 }
 
 .pay {
@@ -186,7 +200,7 @@ iframe {
   font-weight: 600;
   font-size: 15px;
   height: var(--input-height);
-  width: 100%;
+  width: var(--payment-form-width);
   border: none;
   cursor: pointer;
   -webkit-transition: color 0.3s cubic-bezier(0.4, 0, 0.6, 1);
@@ -209,7 +223,9 @@ iframe {
 
 /* Loader */
 
-.loader, .loader:before, .loader:after {
+.loader,
+.loader:before,
+.loader:after {
   border-radius: 50%;
   width: 1em;
   height: 1em;
@@ -240,7 +256,8 @@ iframe {
   clip-path: circle(60px at center);
 }
 
-.loader:before, .loader:after {
+.loader:before,
+.loader:after {
   content: "";
   position: absolute;
   top: 0;
@@ -257,7 +274,9 @@ iframe {
 }
 
 @-webkit-keyframes loading {
-  0%, 80%, 100% {
+  0%,
+  80%,
+  100% {
     box-shadow: 0 2.5em 0 -1.3em;
   }
   40% {
@@ -266,7 +285,9 @@ iframe {
 }
 
 @keyframes loading {
-  0%, 80%, 100% {
+  0%,
+  80%,
+  100% {
     box-shadow: 0 2.5em 0 -1.3em;
   }
   40% {
@@ -354,7 +375,7 @@ iframe {
     opacity: 1;
   }
   40% {
-    height: 1em;
+    height: 2em;
     width: 0.75em;
     opacity: 1;
   }
@@ -366,7 +387,7 @@ iframe {
   80% {
     height: 2em;
     width: 0.75em;
-    opacity: 0.5;
+    opacity: 1;
   }
   100% {
     height: 0;
@@ -392,7 +413,7 @@ iframe {
   transform-origin: 50% 50%;
   stroke-dasharray: 29;
   stroke-dashoffset: 29;
-  animation: stroke 1.2s cubic-bezier(.31,.72,.24,1);
+  animation: stroke 1.2s cubic-bezier(0.3, 0.75, 0.3, 1);
 }
 
 @keyframes stroke {
@@ -406,11 +427,18 @@ iframe {
     height: 25px;
     opacity: 1;
   }
+  85% {
+    width: 25px;
+    height: 25px;
+    opacity: 1;
+    transform: scale(1);
+  }
   100% {
     stroke-dashoffset: 0;
     width: 0;
     height: 0;
     opacity: 0;
+    transform: scale(0);
   }
 }
 
@@ -488,7 +516,8 @@ iframe {
   cursor: pointer;
 }
 
-label.switch:before, label.switch:after {
+label.switch:before,
+label.switch:after {
   display: block;
   position: absolute;
   content: "";
@@ -514,31 +543,13 @@ input[type="checkbox"] {
   display: none;
 }
 
-input[type="checkbox"]:checked+label:before {
+input[type="checkbox"]:checked + label:before {
   background-color: var(--switch-moon-color);
   -webkit-transform: translateX(32px);
   transform: translateX(32px);
 }
 
-input[type="checkbox"]:checked+label:after {
+input[type="checkbox"]:checked + label:after {
   -webkit-transform: translateX(48px) scale(1);
   transform: translateX(48px) scale(1);
 }
-
-#input-barrier {
-  background: none;
-  width: var(--payment-form-width);
-  height: 200px;
-  position: absolute;
-  z-index: 1;
-  display: none;
-}
-
-/* #button-barrier {
-  background: blue;
-  width: var(--payment-form-width);
-  height: var(--input-height);
-  position: absolute;
-  z-index: 1;
-  display: none;
-} */

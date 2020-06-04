@@ -1,5 +1,6 @@
 const pageLoader = document.querySelector(".loader");
 const form = document.getElementById("payment-form");
+const inputs = document.getElementById("inputs");
 const nameInput = document.getElementById("cardholder");
 const nameLabel = document.getElementById("name-label");
 const cardLabel = document.getElementById("card-label");
@@ -13,33 +14,14 @@ const cvvHint = document.querySelector(".cvv-hint");
 const payLoader = document.querySelector(".pay-loader");
 const toastBar = document.getElementById("toast_bar");
 const switcher = document.getElementById("theme-switch");
-const inputBarrier = document.getElementById("input-barrier");
-// const buttonBarrier = document.getElementById("button-barrier");
+const outcome = document.getElementById("outcome");
 var PAYMENT_ID = "";
-
 let theme;
-let outcome = document.getElementById("outcome");
 
 const crossVisible =
   '<svg class="cross" viewBox="0 0 50 50"><path class="cross draw" fill="none" d="M16 16 34 34 M34 16 16 34"></path></svg>';
 const crossHidden =
   '<svg class="cross hide" viewBox="0 0 50 50"><path class="cross draw" fill="none" d="M16 16 34 34 M34 16 16 34"></path></svg>';
-
-const showCheckmark = () => {
-  outcome.classList.add("checkmark", "draw");
-};
-const hideCheckmark = () => {
-  outcome.classList.remove("checkmark", "draw");
-};
-
-const showCross = () => {
-  outcome.class = "cross";
-  outcome.innerHTML = crossVisible;
-};
-const hideCross = () => {
-  outcome.classList.remove("cross");
-  outcome.innerHTML = crossHidden;
-};
 
 const publicKey = "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a";
 
@@ -53,10 +35,11 @@ const handleResponse = (data) => {
     setTimeout(() => {
       hideCheckmark();
       payButton.innerHTML = "&#10227; New Payment";
-      // // Restore pay button access
-      // buttonBarrier.style.display = "none";
-      // Disable form inputs until Frames reloaded (user clicks "New Payment")
-      inputBarrier.style.display = "block";
+
+      // TODO: colour Frames input borders with var(--input-border-success)
+      //nameInput.classList.add("success");
+
+      payButton.style.pointerEvents = "auto";
     }, 1200);
   }
   // Payment declined / timeout error
@@ -66,8 +49,8 @@ const handleResponse = (data) => {
     setTimeout(() => {
       hideCross();
       payButton.innerHTML = "&#10227; Retry";
-      // // Restore pay button access
-      // buttonBarrier.style.display = "none";
+      inputs.style.pointerEvents = "auto";
+      payButton.style.pointerEvents = "auto";
     }, 1200);
   }
 };
@@ -104,7 +87,7 @@ const cleanState = () => {
   };
   hideCheckmark();
   hideCross();
-  inputBarrier.style.display = "none";
+  inputs.style.pointerEvents = "auto";
 };
 
 // utility function to send HTTP calls to our back end API
@@ -170,20 +153,6 @@ socket.on("webhook", (webhookBody) => {
   }, 5000);
 });
 
-// Default theme to user's system preference
-theme = getComputedStyle(document.documentElement).getPropertyValue("content");
-
-// Apply cached theme on reload
-theme = localStorage.getItem("theme");
-
-if (theme) {
-  document.body.classList.add(theme);
-  if (theme == "dark") {
-    // TODO: Skip dark switch animation when loading stored preference
-    switcher.checked = true;
-  }
-}
-
 // Dark mode switch
 document.getElementById("theme-switch").addEventListener("change", (event) => {
   themeSwitch(event);
@@ -207,10 +176,49 @@ const themeSwitch = (event) => {
   }
 };
 
+// Default theme to user's system preference
+theme = getComputedStyle(document.documentElement).getPropertyValue("content");
+
+// Apply cached theme on reload
+theme = localStorage.getItem("theme");
+
+if (theme) {
+  document.body.classList.add(theme);
+  if (theme == "dark") {
+    switcher.checked = true;
+  }
+}
+
 function getTheme() {
   theme = localStorage.getItem("theme");
 }
 
 function setTheme(mode) {
   localStorage.setItem("theme", mode);
+}
+
+const showCheckmark = () => {
+  outcome.classList.add("checkmark", "draw");
+};
+const hideCheckmark = () => {
+  outcome.classList.remove("checkmark", "draw");
+};
+
+const showCross = () => {
+  outcome.class = "cross";
+  outcome.innerHTML = crossVisible;
+};
+const hideCross = () => {
+  outcome.classList.remove("cross");
+  outcome.innerHTML = crossHidden;
+};
+
+function createClass(name,rules){
+  var style = document.createElement('style');
+  style.type = 'text/css';
+  document.getElementsByTagName('head')[0].appendChild(style);
+  if(!(style.sheet||{}).insertRule) 
+      (style.styleSheet || style.sheet).addRule(name, rules);
+  else
+      style.sheet.insertRule(name+"{"+rules+"}",0);
 }

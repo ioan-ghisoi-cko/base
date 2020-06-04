@@ -5,8 +5,9 @@
   <title>Payment Demo</title>
   <link rel="stylesheet" href="./style.css" />
   <link rel="icon" href="./images/favicon.ico" type="image/ico" />
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+  <script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js">
+  </script>
 </head>
 
 <body class="light">
@@ -24,51 +25,54 @@
 
   <div id="payment-form" style="display: none;">
 
-    <div id="input-barrier"></div>
+    <div id="inputs">
 
-    <!-- Cardholder Name -->
-    <div class="input-wrapper name">
-      <label id="name-label" for="name-input">Cardholder Name</label>
-      <input type="text" name="cc-name" id="cardholder" placeholder="John Smith"
-        autocomplete="cc-name">
-    </div>
-
-    <!-- Card Number -->
-    <div class="input-wrapper card-number">
-      <label id="card-label">Card Number</label>
-      <div class="card-and-scheme">
-        <div class="card-number-frame"></div>
-        <img id="card-scheme" />
+      <!-- Cardholder Name -->
+      <div class="input-wrapper name">
+        <label id="name-label" for="name-input">Cardholder Name</label>
+        <input type="text" name="cc-name" id="cardholder" placeholder="John Smith"
+          autocomplete="cc-name">
       </div>
-      <div class="hint card-hint hide"><span class="line"></span>4242 4242 4242 4242</div>
-    </div>
 
-    <div class="date-and-cvv">
-
-      <!-- Expiry Date -->
-      <div class="input-wrapper expiry-date">
-        <label id="date-label">Expiry Date</label>
-        <div class="expiry-date-frame"></div>
-        <div class="hint expiry-date-hint hide">Future Date<span class="line"></span>
+      <!-- Card Number -->
+      <div class="input-wrapper card-number">
+        <label id="card-label">Card Number</label>
+        <div class="card-and-scheme">
+          <div class="card-number-frame"></div>
+          <img id="card-scheme" />
+        </div>
+        <div class="hint card-hint hide"><span class="line"></span>
+          4242 4242 4242 4242
         </div>
       </div>
 
-      <!-- Cvv -->
-      <div class="input-wrapper cvv">
-        <label id="cvv-label">CVV</label>
-        <div class="cvv-frame"></div>
-        <div class="hint cvv-hint hide"><span class="line"></span>100</div>
-      </div>
-    </div>
+      <div class="date-and-cvv">
 
-    <!-- <div id="button-barrier"></div> -->
+        <!-- Expiry Date -->
+        <div class="input-wrapper expiry-date">
+          <label id="date-label">Expiry Date</label>
+          <div class="expiry-date-frame"></div>
+          <div class="hint expiry-date-hint hide">
+            Future Date<span class="line"></span>
+          </div>
+        </div>
+
+        <!-- Cvv -->
+        <div class="input-wrapper cvv">
+          <label id="cvv-label">CVV</label>
+          <div class="cvv-frame"></div>
+          <div class="hint cvv-hint hide"><span class="line"></span>100</div>
+        </div>
+      </div>
+
+    </div>
 
     <div class="button-area">
       <button id="pay-button" class="pay" disabled>Pay Now </button>
       <div class="loader pay-loader hide"></div>
       <div id="outcome"></div>
     </div>
-    <!-- TODO: Add error hint to indicate payment declined / timeout to user-->
+    <!-- TODO: Add error "hint" to indicate payment declined / timeout to user-->
   </div>
   </div>
 
