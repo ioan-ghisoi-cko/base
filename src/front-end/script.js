@@ -154,8 +154,8 @@ socket.on("webhook", (webhookBody) => {
   toastBar.append(newToast);
   newToast.classList.add("show");
   setTimeout(function () {
-    newToast.classList.remove("show");
-    toastBar.classList.add("hide")
+    newToast.classList.remove("show")
+    newToast.outerHTML = ""
   }, 5000);
 });
 
