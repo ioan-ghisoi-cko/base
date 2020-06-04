@@ -13,11 +13,7 @@
   --light-red: #d96830;
   --red: #ec5f77;
   --green: #6cc3b4;
-  --blue0: #13395e;
-  --blue1: rgba(19, 57, 94, 0.4);
-  --blue2: #000839;
   --yellow: #ffa41b;
-  --orange: #d96830;
 }
 
 .light {
@@ -33,7 +29,6 @@
   --button-background: var(--green);
   --button-background-error: var(--red);
   --button-text: var(--white);
-  --switch-background-color: var(--blue0);
   --switch-moon-color: var(--white);
   --switch-sun-color: var(--yellow);
   --switch-border-color: var(--white);
@@ -52,7 +47,6 @@
   --button-background: var(--white);
   --button-background-error: var(--red);
   --button-text: var(--black);
-  --switch-background-color: var(--black);
   --switch-moon-color: var(--white);
   --switch-sun-color: var(--yellow);
   --switch-border-color: var(--white);
@@ -71,10 +65,8 @@ body {
 }
 
 /* Remove autofill color */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px var(--background) inset !important;
   box-shadow: 0 0 0 30px var(--background) inset !important;
 }
@@ -206,7 +198,7 @@ iframe {
 }
 
 .pay:disabled {
-  background-color: var(--button-background-disabled);
+  background-color: var(--button-background-disabled) !important;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -217,9 +209,7 @@ iframe {
 
 /* Loader */
 
-.loader,
-.loader:before,
-.loader:after {
+.loader, .loader:before, .loader:after {
   border-radius: 50%;
   width: 1em;
   height: 1em;
@@ -250,8 +240,7 @@ iframe {
   clip-path: circle(60px at center);
 }
 
-.loader:before,
-.loader:after {
+.loader:before, .loader:after {
   content: "";
   position: absolute;
   top: 0;
@@ -268,9 +257,7 @@ iframe {
 }
 
 @-webkit-keyframes loading {
-  0%,
-  80%,
-  100% {
+  0%, 80%, 100% {
     box-shadow: 0 2.5em 0 -1.3em;
   }
   40% {
@@ -279,9 +266,7 @@ iframe {
 }
 
 @keyframes loading {
-  0%,
-  80%,
-  100% {
+  0%, 80%, 100% {
     box-shadow: 0 2.5em 0 -1.3em;
   }
   40% {
@@ -495,7 +480,7 @@ iframe {
   width: 62px;
   height: 30px;
   border-radius: 40px;
-  background-color: var(--switch-background-color);
+  background-color: var(--black);
   outline: none;
   border-color: var(--switch-border-color);
   box-shadow: 0 0 10px var(--switch-border-color);
@@ -503,8 +488,7 @@ iframe {
   cursor: pointer;
 }
 
-label.switch:before,
-label.switch:after {
+label.switch:before, label.switch:after {
   display: block;
   position: absolute;
   content: "";
@@ -522,7 +506,7 @@ label.switch:before {
 }
 
 label.switch:after {
-  background-color: var(--switch-background-color);
+  background-color: var(--black);
   left: -18px;
 }
 
@@ -530,13 +514,13 @@ input[type="checkbox"] {
   display: none;
 }
 
-input[type="checkbox"]:checked + label:before {
+input[type="checkbox"]:checked+label:before {
   background-color: var(--switch-moon-color);
   -webkit-transform: translateX(32px);
   transform: translateX(32px);
 }
 
-input[type="checkbox"]:checked + label:after {
+input[type="checkbox"]:checked+label:after {
   -webkit-transform: translateX(48px) scale(1);
   transform: translateX(48px) scale(1);
 }
