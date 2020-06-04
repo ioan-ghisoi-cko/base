@@ -40,6 +40,9 @@ const server = app.listen(port, () => {
 var io = socket(server);
 
 app.post("/webhook", (req, res) => {
-  io.emit("webhook", req.body.type);
+  io.emit("webhook", {
+    type: req.body.type,
+    paymentId: req.body.data.id,
+  });
   res.sendStatus(200);
 });

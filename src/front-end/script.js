@@ -13,6 +13,7 @@ const cvvHint = document.querySelector(".cvv-hint");
 const payLoader = document.querySelector(".pay-loader");
 const toastBar = document.getElementById("toast_bar");
 const switcher = document.getElementById("theme-switch");
+var PAYMENT_ID = "";
 
 let theme;
 let outcome = document.getElementById("outcome");
@@ -38,10 +39,11 @@ const hideCross = () => {
   outcome.innerHTML = crossHidden;
 };
 
-const publicKey = "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a"
+const publicKey = "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a";
 
 const handleResponse = (data) => {
   payLoader.classList.add("hide");
+  PAYMENT_ID = data.id;
   // Payment approved
   if (data.approved) {
     payButton.style.backgroundColor = "var(--button-background)";
@@ -132,8 +134,10 @@ const timeout = (ms, promise) => {
 // Socket part so we can handle webhooks:
 var socket = io();
 socket.on("webhook", (webhookBody) => {
-  console.log(webhookBody);
-  let tempWebhook = webhookBody.replace("_", " ");
+  if (webhookBody.paymentId !== PAYMENT_ID) {
+    return;
+  }
+  let tempWebhook = webhookBody.type.replace("_", " ");
 
   let newToast = document.createElement("div");
   newToast.classList.add("toast_body");
@@ -153,8 +157,8 @@ socket.on("webhook", (webhookBody) => {
   toastBar.append(newToast);
   newToast.classList.add("show");
   setTimeout(function () {
-    newToast.classList.remove("show")
-    newToast.outerHTML = ""
+    newToast.classList.remove("show");
+    newToast.outerHTML = "";
   }, 5000);
 });
 
