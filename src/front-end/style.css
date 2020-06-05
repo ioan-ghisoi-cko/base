@@ -120,6 +120,7 @@ iframe {
 
 #cardholder.success {
   border: 1px solid var(--input-border-success);
+  box-shadow:inset 0px 0px 0px 1px var(--input-border);
 }
 
 #cardholder:focus {
