@@ -164,11 +164,6 @@ iframe {
   height: var(--input-height);
 }
 
-#card-number.success {
-  border: 1px solid var(--input-border-success);
-  border-radius: 6px;
-}
-
 .card-number img {
   position: absolute;
   width: 35px;
@@ -184,11 +179,6 @@ iframe {
   display: flex;
 }
 
-#expiration-date.success {
-  border: 1px solid var(--input-border-success);
-  border-radius: 6px;
-}
-
 .expiry-date {
   margin-right: 0.5rem;
 }
@@ -197,7 +187,7 @@ iframe {
   margin-left: 0.5rem;
 }
 
-#cvv-code.success {
+.success {
   border: 1px solid var(--input-border-success);
   border-radius: 6px;
 }
