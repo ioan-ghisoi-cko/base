@@ -238,7 +238,8 @@ payButton.addEventListener("click", function (event) {
     event.preventDefault();
     payButton.innerHTML = "";
     payLoader.classList.remove("hide");
-    // TODO: Disable pay button during load to prevent animation overlap
+    payButton.style.pointerEvents = "none";
+    inputs.style.pointerEvents = "none";
     Frames.submitCard();
     Frames.enableSubmitForm();
   }
