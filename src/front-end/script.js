@@ -9,12 +9,11 @@ const nameLabel = document.getElementById("name-label");
 const cardLabel = document.getElementById("card-label");
 const dateLabel = document.getElementById("date-label");
 const cvvLabel = document.getElementById("cvv-label");
-const payButton = document.getElementById("pay-button");
+const payButton = document.querySelector(".pay");
 const scheme = document.getElementById("card-scheme");
 const cardHint = document.querySelector(".card-hint");
 const dateHint = document.querySelector(".expiry-date-hint");
 const cvvHint = document.querySelector(".cvv-hint");
-const errorHint = document.querySelector(".error-hint");
 const payLoader = document.querySelector(".pay-loader");
 const toastBar = document.getElementById("toast_bar");
 const switcher = document.getElementById("theme-switch");
@@ -22,14 +21,12 @@ const outcome = document.getElementById("outcome");
 const error = document.querySelector(".error");
 const errorMessage = document.getElementById("error-hint");
 var PAYMENT_ID = "";
-let theme;
+var theme = "";
 
 const crossVisible =
   '<svg class="cross" viewBox="0 0 50 50"><path class="cross draw" fill="none" d="M16 16 34 34 M34 16 16 34"></path></svg>';
 const crossHidden =
   '<svg class="cross hide" viewBox="0 0 50 50"><path class="cross draw" fill="none" d="M16 16 34 34 M34 16 16 34"></path></svg>';
-
-const publicKey = "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a";
 
 const handleResponse = (data) => {
   payLoader.classList.add("hide");
@@ -106,7 +103,7 @@ const cleanState = () => {
   errorMessage.innerHTML = "Payment declined";
 };
 
-// utility function to send HTTP calls to our back end API
+// Utility function to send HTTP calls to our back-end API
 const http = ({ method, route, body }, callback) => {
   let requestData = {
     method,
@@ -125,7 +122,7 @@ const http = ({ method, route, body }, callback) => {
   timeout(10000, fetch(`${window.location.origin}${route}`, requestData))
     .then((res) => res.json())
     .then((data) => callback(data))
-    .catch((er) => (errorMessage.innerHTML = "Connection timed out"));
+    .catch((er) => errorMessage.innerHTML = "Connection timed out");
 };
 
 // For connection timeout error handling
@@ -169,6 +166,21 @@ socket.on("webhook", (webhookBody) => {
   }, 5000);
 });
 
+/* Themes */
+
+// Default theme to user's system preference
+theme = getComputedStyle(document.documentElement).getPropertyValue("content");
+
+// Apply cached theme on page reload
+theme = localStorage.getItem("theme");
+
+if (theme) {
+  document.body.classList.add(theme);
+  if (theme == "dark") {
+    switcher.checked = true;
+  }
+}
+
 // Dark mode switch
 document.getElementById("theme-switch").addEventListener("change", (event) => {
   themeSwitch(event);
@@ -192,19 +204,6 @@ const themeSwitch = (event) => {
   }
 };
 
-// Default theme to user's system preference
-theme = getComputedStyle(document.documentElement).getPropertyValue("content");
-
-// Apply cached theme on reload
-theme = localStorage.getItem("theme");
-
-if (theme) {
-  document.body.classList.add(theme);
-  if (theme == "dark") {
-    switcher.checked = true;
-  }
-}
-
 function getTheme() {
   theme = localStorage.getItem("theme");
 }
@@ -212,6 +211,8 @@ function getTheme() {
 function setTheme(mode) {
   localStorage.setItem("theme", mode);
 }
+
+/* Outcome animations */
 
 const showCheckmark = () => {
   outcome.classList.add("checkmark", "draw");

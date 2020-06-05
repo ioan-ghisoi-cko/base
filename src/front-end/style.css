@@ -376,7 +376,7 @@ iframe {
 
 .checkmark {
   position: absolute;
-  top: calc(var(--input-height) / 2);
+  top: calc(var(--input-height) / 2 + 0.2em);
   left: calc(var(--payment-form-width) / 2 - 1em);
 }
 

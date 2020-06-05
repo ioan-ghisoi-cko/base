@@ -1,3 +1,5 @@
+const publicKey = "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a";
+
 const initializeFrames = () => {
   if (theme == "dark") {
     Frames.init({
@@ -11,7 +13,6 @@ const initializeFrames = () => {
       style: {
         base: {
           paddingLeft: "1rem",
-          borderRadius: "5px",
           border: "1px solid #292929",
           borderRadius: "5px",
           fontSize: "14px",
@@ -50,7 +51,6 @@ const initializeFrames = () => {
       style: {
         base: {
           paddingLeft: "1rem",
-          borderRadius: "5px",
           border: "1px solid #E2E2E2",
           borderRadius: "5px",
           color: "#000",
@@ -202,7 +202,7 @@ Frames.addEventHandler(Frames.Events.FRAME_VALIDATION_CHANGED, (event) => {
   state[event.element].isEmpty = event.isEmpty;
 });
 
-// When the validation changes for the hole Frames form
+// When the validation changes for the whole Frames form
 Frames.addEventHandler(Frames.Events.CARD_VALIDATION_CHANGED, (event) => {
   if (Frames.isCardValid() && nameInput.value.length > 2) {
     payButton.disabled = false;
@@ -211,7 +211,7 @@ Frames.addEventHandler(Frames.Events.CARD_VALIDATION_CHANGED, (event) => {
   }
 });
 
-// When frames detect the payment method
+// When Frames detects the payment method
 Frames.addEventHandler(Frames.Events.PAYMENT_METHOD_CHANGED, (event) => {
   const pm = event.paymentMethod;
 
@@ -247,7 +247,7 @@ payButton.addEventListener("click", function (event) {
   }
 });
 
-// We call our Back End server to process the payment with the token
+// We call our back-end server to process the payment with the token
 const payWithToken = (token) => {
   http(
     {
