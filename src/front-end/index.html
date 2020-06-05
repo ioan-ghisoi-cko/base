@@ -5,7 +5,7 @@
   <title>Payment Demo</title>
   <link rel="stylesheet" href="./style.css" />
   <link rel="icon" href="./images/favicon.ico" type="image/ico" />
-  <script 
+  <script
     src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js">
   </script>
 </head>
@@ -38,7 +38,7 @@
       <div class="input-wrapper card-number">
         <label id="card-label">Card Number</label>
         <div class="card-and-scheme">
-          <div class="card-number-frame"></div>
+          <div id="card-number" class="card-number-frame"></div>
           <img id="card-scheme" />
         </div>
         <div class="hint card-hint hide"><span class="line"></span>
@@ -51,7 +51,7 @@
         <!-- Expiry Date -->
         <div class="input-wrapper expiry-date">
           <label id="date-label">Expiry Date</label>
-          <div class="expiry-date-frame"></div>
+          <div id="expiration-date" class="expiry-date-frame"></div>
           <div class="hint expiry-date-hint hide">
             Future Date<span class="line"></span>
           </div>
@@ -60,7 +60,7 @@
         <!-- Cvv -->
         <div class="input-wrapper cvv">
           <label id="cvv-label">CVV</label>
-          <div class="cvv-frame"></div>
+          <div id="cvv-code" class="cvv-frame"></div>
           <div class="hint cvv-hint hide"><span class="line"></span>100</div>
         </div>
       </div>
@@ -68,11 +68,16 @@
     </div>
 
     <div class="button-area">
-      <button id="pay-button" class="pay" disabled>Pay Now </button>
+      <button id="pay-button" class="pay" disabled>Pay Now</button>
       <div class="loader pay-loader hide"></div>
       <div id="outcome"></div>
+      <div class="error hide">
+        <span class="line"></span>
+        <div id="error-hint" class="hint">
+          Payment declined
+        </div>
+      </div>
     </div>
-    <!-- TODO: Add error "hint" to indicate payment declined / timeout to user-->
   </div>
   </div>
 

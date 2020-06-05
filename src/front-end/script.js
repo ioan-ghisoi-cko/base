@@ -2,6 +2,9 @@ const pageLoader = document.querySelector(".loader");
 const form = document.getElementById("payment-form");
 const inputs = document.getElementById("inputs");
 const nameInput = document.getElementById("cardholder");
+const cardInput = document.getElementById("card-number");
+const dateInput = document.getElementById("expiration-date");
+const cvvInput = document.getElementById("cvv-code");
 const nameLabel = document.getElementById("name-label");
 const cardLabel = document.getElementById("card-label");
 const dateLabel = document.getElementById("date-label");
@@ -11,10 +14,13 @@ const scheme = document.getElementById("card-scheme");
 const cardHint = document.querySelector(".card-hint");
 const dateHint = document.querySelector(".expiry-date-hint");
 const cvvHint = document.querySelector(".cvv-hint");
+const errorHint = document.querySelector(".error-hint");
 const payLoader = document.querySelector(".pay-loader");
 const toastBar = document.getElementById("toast_bar");
 const switcher = document.getElementById("theme-switch");
 const outcome = document.getElementById("outcome");
+const error = document.querySelector(".error");
+const errorMessage = document.getElementById("error-hint");
 var PAYMENT_ID = "";
 let theme;
 
@@ -36,8 +42,11 @@ const handleResponse = (data) => {
       hideCheckmark();
       payButton.innerHTML = "&#10227; New Payment";
 
-      // TODO: colour Frames input borders with var(--input-border-success)
-      //nameInput.classList.add("success");
+      // Colour Frames input borders to show successful payment
+      nameInput.classList.add("success");
+      cardInput.classList.add("success");
+      dateInput.classList.add("success");
+      cvvInput.classList.add("success");
 
       payButton.style.pointerEvents = "auto";
     }, 1200);
@@ -51,6 +60,7 @@ const handleResponse = (data) => {
       payButton.innerHTML = "&#10227; Retry";
       inputs.style.pointerEvents = "auto";
       payButton.style.pointerEvents = "auto";
+      error.classList.remove("hide");
     }, 1200);
   }
 };
@@ -88,6 +98,12 @@ const cleanState = () => {
   hideCheckmark();
   hideCross();
   inputs.style.pointerEvents = "auto";
+  nameInput.classList.remove("success");
+  cardInput.classList.remove("success");
+  dateInput.classList.remove("success");
+  cvvInput.classList.remove("success");
+  error.classList.add("hide");
+  errorMessage.innerHTML = "Payment declined";
 };
 
 // utility function to send HTTP calls to our back end API
@@ -109,7 +125,7 @@ const http = ({ method, route, body }, callback) => {
   timeout(10000, fetch(`${window.location.origin}${route}`, requestData))
     .then((res) => res.json())
     .then((data) => callback(data))
-    .catch((er) => console.log(er));
+    .catch((er) => (errorMessage.innerHTML = "Connection timed out"));
 };
 
 // For connection timeout error handling
@@ -212,13 +228,3 @@ const hideCross = () => {
   outcome.classList.remove("cross");
   outcome.innerHTML = crossHidden;
 };
-
-function createClass(name,rules){
-  var style = document.createElement('style');
-  style.type = 'text/css';
-  document.getElementsByTagName('head')[0].appendChild(style);
-  if(!(style.sheet||{}).insertRule) 
-      (style.styleSheet || style.sheet).addRule(name, rules);
-  else
-      style.sheet.insertRule(name+"{"+rules+"}",0);
-}

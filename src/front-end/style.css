@@ -164,6 +164,11 @@ iframe {
   height: var(--input-height);
 }
 
+#card-number.success {
+  border: 1px solid var(--input-border-success);
+  border-radius: 6px;
+}
+
 .card-number img {
   position: absolute;
   width: 35px;
@@ -179,12 +184,22 @@ iframe {
   display: flex;
 }
 
+#expiration-date.success {
+  border: 1px solid var(--input-border-success);
+  border-radius: 6px;
+}
+
 .expiry-date {
   margin-right: 0.5rem;
 }
 
 .cvv {
   margin-left: 0.5rem;
+}
+
+#cvv-code.success {
+  border: 1px solid var(--input-border-success);
+  border-radius: 6px;
 }
 
 /* Payment button */
@@ -208,7 +223,7 @@ iframe {
 }
 
 .pay:hover {
-  box-shadow: 0 2px 5px 0 var(--gray);
+  box-shadow: 0 2px 5px 0 var(--input-border-focus);
 }
 
 .pay:disabled {
@@ -337,6 +352,24 @@ iframe {
 
 .cvv-hint span {
   margin-right: 5px;
+}
+
+.error div {
+  width: var(--payment-form-width);
+}
+
+.error .line {
+  height: 15px;
+  border-top: none;
+  border-left: 1px solid var(--button-background-error);
+  position: fixed;
+  left: calc(var(--payment-form-width) / 2);
+}
+
+.error .hint {
+  top: 55px;
+  text-align: center;
+  display: inline-block;
 }
 
 /* Check mark */

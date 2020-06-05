@@ -238,6 +238,8 @@ payButton.addEventListener("click", function (event) {
     event.preventDefault();
     payButton.innerHTML = "";
     payLoader.classList.remove("hide");
+    error.classList.add("hide");
+    errorMessage.innerHTML = "Payment declined";
     payButton.style.pointerEvents = "none";
     inputs.style.pointerEvents = "none";
     Frames.submitCard();
