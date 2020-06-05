@@ -5,7 +5,7 @@
   <title>Payment Demo</title>
   <link rel="stylesheet" href="./style.css" />
   <link rel="icon" href="./images/favicon.ico" type="image/ico" />
-  <script 
+  <script
     src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js">
   </script>
 </head>
@@ -68,11 +68,14 @@
     </div>
 
     <div class="button-area">
-      <button id="pay-button" class="pay" disabled>Pay Now </button>
+      <button class="pay" disabled>Pay Now</button>
       <div class="loader pay-loader hide"></div>
       <div id="outcome"></div>
+      <div class="error hide">
+        <span class="line"></span>
+        <div id="error-hint" class="hint"></div>
+      </div>
     </div>
-    <!-- TODO: Add error "hint" to indicate payment declined / timeout to user-->
   </div>
   </div>
 

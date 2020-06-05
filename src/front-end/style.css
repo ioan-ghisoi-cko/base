@@ -120,6 +120,7 @@ iframe {
 
 #cardholder.success {
   border: 1px solid var(--input-border-success);
+  box-shadow:inset 0px 0px 0px 1px var(--input-border);
 }
 
 #cardholder:focus {
@@ -187,6 +188,11 @@ iframe {
   margin-left: 0.5rem;
 }
 
+.success {
+  border: 1px solid var(--input-border-success);
+  border-radius: 6px;
+}
+
 /* Payment button */
 
 .button-area {
@@ -208,7 +214,7 @@ iframe {
 }
 
 .pay:hover {
-  box-shadow: 0 2px 5px 0 var(--gray);
+  box-shadow: 0 2px 5px 0 var(--input-border-focus);
 }
 
 .pay:disabled {
@@ -339,11 +345,29 @@ iframe {
   margin-right: 5px;
 }
 
+.error div {
+  width: var(--payment-form-width);
+}
+
+.error .line {
+  height: 15px;
+  border-top: none;
+  border-left: 1px solid var(--button-background-error);
+  position: fixed;
+  left: calc(var(--payment-form-width) / 2);
+}
+
+.error .hint {
+  top: 55px;
+  text-align: center;
+  display: inline-block;
+}
+
 /* Check mark */
 
 .checkmark {
   position: absolute;
-  top: calc(var(--input-height) / 2);
+  top: calc(var(--input-height) / 2 + 0.2em);
   left: calc(var(--payment-form-width) / 2 - 1em);
 }
 
